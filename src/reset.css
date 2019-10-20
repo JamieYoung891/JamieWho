@@ -1,0 +1,53 @@
+html, body {
+  margin: 0;
+  
+  font-family: '나눔스퀘어라운드', sans-serif;
+  font-size: 2.5vmin;
+  color: hsl(42, 10%, 50%);
+  line-height: 1.5;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  scroll-behavior: smooth;
+}
+
+
+
+body, header, nav, article, section, footer, div, span, ul, li{
+  position: relative;  box-sizing: border-box;
+}
+
+.position-center {
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  transform: translateX(50%) translateY(50%);
+}
+
+.show-right { right: 0 }
+.hidden-right { right: -100% }
+
+
+
+.fade-in, .fade-out {
+  animation-name: fade;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+}
+.fade-in {animation-delay: 0.5s}
+.fade-out { animation-direction: reverse; }
+@keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+
+
+.display-none { display: none }
+
+
+
+.button:hover, .close-button:hover { cursor: pointer }

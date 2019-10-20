@@ -1,0 +1,63 @@
+.footer-slogan {
+  max-width: 90vmin;
+  margin: 0 auto;
+  line-height: 3vmin;
+  color: #999;
+}
+
+.footer-slogan > div {
+  text-align: justify;
+}
+
+.footer-slogan .slogan-spacer::after {
+  content: "";
+  width: 0.5vmin;
+  height: 100%;
+  border-radius: 1vmin;
+  background-color: #eee;
+
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  transform: translateX(50%) translateY(50%);
+}
+
+.footer-slogan .slogan-filler {
+  display: inline-block;
+  width: 100%;
+  line-height: 1;
+}
+
+
+
+.footer-slogan em {
+  font-style: normal;
+  font-weight: 800;
+}
+.footer-slogan .slogan-main em::before,
+.footer-slogan .slogan-main em::after {
+  color: #fab617;
+  font-size: 120%;
+  margin: 0 1vmin;
+}
+.footer-slogan .slogan-main em::before { content: "{" }
+.footer-slogan .slogan-main em::after { content: "}" }
+.footer-slogan .slogan-main em:first-child::before { margin-left: 0; }
+.footer-slogan .slogan-main em:last-child::after { margin-right: 0; }
+
+
+
+.footer-slogan-main .slogan-text {
+  font-size: 5vmin;
+  line-height: 1.2;
+}
+
+.footer-slogan-sub .slogan-text {
+  font-size: 4vmin;
+  line-height: 1.35;
+}
+
+.footer-slogan-theme .slogan-text {
+  font-size: 3vmin;
+  line-height: 1.5;
+}

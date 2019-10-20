@@ -1,0 +1,73 @@
+.jamie-who {
+  height: 100%;
+  width: 100%;
+}
+
+.text-heading, h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: calc(1 + 1 / 3);
+}
+
+.text-right {
+  width: fit-content;
+  text-align: right;
+  margin-right: 0;
+  margin-left: auto;
+}
+.text-left {
+  width: fit-content;
+  text-align: left;
+}
+.text-center {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+
+.jamie-who-logo{
+  height: 8vmin;
+  width: 8vmin;
+  border-radius: 0 0 3vmin 0;
+  background-color: #fab617;
+
+  text-transform: lowercase;
+  font-size: 4vmin;
+  font-weight: 800;
+  color: rgba(255,255,255,0.7);
+  line-height: 1;
+
+  display: grid;
+  align-items: center;
+
+  transition: 0.5s color;
+}
+.jamie-who-logo:hover { color: rgba(255,255,255,1); }
+.jamie-who-logo > span {
+  width: min-content;
+  margin: auto;
+}
+
+.close-button {
+  height: 6vmin;
+  width: 6vmin;
+}
+
+.close-button::before, .close-button::after {
+  content: "";
+  padding-right: 6vmin;
+
+  position: absolute;
+  top: 50%;
+  transform-origin: center;
+  border-top: 1vmin solid #fab617;
+}
+
+.close-button::before {
+  transform: rotate(45deg)
+}
+.close-button::after{
+  transform: rotate(-45deg)
+}

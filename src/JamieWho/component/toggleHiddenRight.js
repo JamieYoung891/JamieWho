@@ -1,0 +1,1 @@
+export const toggleHiddenRight = (elm) => { if (elm) elm.classList.toggle("hidden-right") }

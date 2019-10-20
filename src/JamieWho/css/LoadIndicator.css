@@ -1,0 +1,30 @@
+.load-indicator{
+  z-index: 100;
+  border-radius: 1vmin;
+}
+.load-indicator-wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+}
+
+.load-indicator-progress {
+  width: 70vmin;
+  height: 7vmin;
+
+  -webkit-appearance: none;
+  appearance: none;
+}
+.load-indicator-progress[value]::-webkit-progress-bar,
+.load-indicator-progress[value]::-webkit-progress-value {border-radius: 5vmin;}
+
+.load-indicator-progress[value]::-webkit-progress-bar {background-color: #eee;}
+.load-indicator-progress[value]::-webkit-progress-value {background-color: #fab617; transition: 100ms ease;}
+.load-indicator-text {
+  line-height: 100%;
+
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  transform: translateX(50%) translateY(50%);
+}
