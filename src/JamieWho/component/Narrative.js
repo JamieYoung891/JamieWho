@@ -4,7 +4,7 @@ import "../css/Narrative.css";
 import Portfolio from "./Portfolio"
 
 function Narrative({ data }) {
-  const { narrative, skills } = data;
+  const { narrative, skills, itemNum, setItemNum } = data;
 
   const makeSection = () => {
 
@@ -37,13 +37,18 @@ function Narrative({ data }) {
         if (item.isList) {
           const list = skills.index.filter(
             o => o.category === item.sentence
-          )
+          ), listElms = [];
 
           for (let i = 0; i < list.length; i++)
-            list[i] = (
+            listElms[i] = (
               <li
                 key={`${item.sentence}-${i}`}
-                className={"narrative-section-skills-list-item skills-list-item"}
+                className={"narrative-section-skills-list-item skills-list-item button"}
+                onClick={
+                  () => setItemNum(
+                    Object.assign({}, itemNum, { skills: list[i].name })
+                  )
+                }
               >{list[i].em ?
                 <em>{list[i].title}</em> :
                 <span>{list[i].title}</span>}
@@ -55,7 +60,7 @@ function Narrative({ data }) {
             <ul
               key={`${key}-${i}`}
               className={`narrative-section-item narrative-section-skills-list ${item.sentence}-skills-list`}
-            >{list}
+            >{listElms}
             </ul>
           )
 

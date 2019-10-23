@@ -2,7 +2,7 @@ import React from "react"
 import "../css/Resume.css"
 
 function Resume(props) {
-  const { info, portfolio, resume, skills } = props.data
+  const { info, portfolio, resume, skills, itemNum, setItemNum } = props.data
 
   const contactList = () => {
     const els = [], data = info.contact;
@@ -79,6 +79,8 @@ function Resume(props) {
               categoryItemElmsArray.push(
                 <li
                   key={`${key}-${i}-${j}`}
+                  onClick={() => setItemNum(Object.assign({}, itemNum, { skills: item.name }))}
+                  className="button"
                 >
                   {(() => {
                     if (item.em) return <em>{item.title}</em>

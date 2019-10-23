@@ -161,10 +161,10 @@
 }
 .section-technical-skills .section-list ul > li {
   display: inline;
-  font-size: 4vmin;
+  font-size: 1.8rem;
   font-weight: 200;
   margin-right: 2vmin;
-  color: hsl(42, 5%, 50%);
+  color: hsl(42, 96%, 65%);
 }
 .section-technical-skills .section-list ul > li::after { content: ", " }
 .section-technical-skills .section-list ul > li:last-of-type::after { content: none; }
@@ -185,3 +185,9 @@
 .section-list .list-item-desc span:last-of-type { margin-right: 0 }
 .section-list .list-item-desc span:nth-child(1) { font-size: 3vmin; font-weight: 400; }
 .section-list .list-item-desc span:nth-child(3) { font-size: 2vmin; }
+
+
+
+.list-technical-skills > li > ul > li:hover {
+  color: hsl(42, 96%, 45%);
+}

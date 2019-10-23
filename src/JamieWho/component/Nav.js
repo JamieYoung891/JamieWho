@@ -140,7 +140,6 @@ function Nav({ data }) {
           indicatorElms[i].classList.remove(indicatorClassName)
       }
     }
-
   }, [contentMode, itemNum, className.trigger.subCurrent])
 
   useEffect(() => { // indicateNav reset onChange ofContentMode

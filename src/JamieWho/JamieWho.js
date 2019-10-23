@@ -12,12 +12,13 @@ import Resume from "./component/Resume"
 import Portfolio from "./component/Portfolio"
 import Narrative from "./component/Narrative"
 import Contacts from "./component/Contacts"
+import SkillsDescription from './component/description/SkillsDescription'
 
 function JamieWho(props) {
   // const { setAppMode } = props
   const [contentMode, setContentMode] = useState("intro");
   const { data, loadInfo } = useData(); // getData from Google Spreadsheet using Tabletop
-  const [itemNum, setItemNum] = useState({portfolio: 0});
+  const [itemNum, setItemNum] = useState({portfolio: 0, skills: false});
 
   const componentInserter = () => {
     if (loadInfo.isDataReady) {
@@ -79,6 +80,10 @@ function JamieWho(props) {
             break;
           case "contacts":
             components.push(<Contacts key={contentMode} data={__data}></Contacts>)
+            break;
+
+          case "skillsDescription":
+            components.push(<SkillsDescription key={componentNames} data={__data}></SkillsDescription>)
             break;
 
           default:

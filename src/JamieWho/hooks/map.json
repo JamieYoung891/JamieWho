@@ -14,17 +14,20 @@
     { "name": "contacts", "title": "연락처" }
   ],
 
-  "layout": ["header", "nav", "content", "footer"],
+  "layout": ["header", "nav", "content", "footer", "skillsDescription"],
 
   "componentData": {
-    "resume": ["resume", "info", "portfolio", "skills"],
-    "portfolio": ["portfolio", "itemNum", "setItemNum"],
-    "narrative": ["narrative", "skills", "portfolio", "itemNum", "setItemNum"],
-    "contacts": ["info"],
 
     "loadIndicator" : ["loadInfo"],
     "header": ["info", "contents", "contentMode", "setContentMode"],
     "nav": ["contents", "content", "contentMode", "setContentMode", "itemNum", "setItemNum"],
-    "footer": ["info"]
+    "footer": ["info"],
+    
+    "resume": ["resume", "info", "portfolio", "skills", "itemNum", "setItemNum"],
+    "portfolio": ["portfolio", "itemNum", "setItemNum"],
+    "narrative": ["narrative", "skills", "portfolio", "itemNum", "setItemNum"],
+    "contacts": ["info"],
+
+    "skillsDescription" : ["itemNum", "setItemNum", "skills", "portfolio"]
   }
 }
