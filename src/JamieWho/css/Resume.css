@@ -36,6 +36,8 @@
   height: 15vmin;
   width: 15vmin;
   border-radius: 50%;
+  
+  background-size: contain;
   background-color: hsla(0, 0%, 0%, 0.1);
 }
 
@@ -149,6 +151,9 @@
   content: ":";
   margin: 0 1em;
   color: hsl(42, 5%, 78%);
+}
+.section-side-projects dt > a {
+  margin-left: 0.2em;
 }
 
 .section-side-projects dd li { margin-bottom: 0.5vmin; }

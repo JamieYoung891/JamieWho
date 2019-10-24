@@ -50,7 +50,10 @@ function Resume(props) {
               <div key={`${key}-${i}`} className={`list-item list-item-${key}`}>
                 <dt>
                   <span>{item.title}</span>
-                  <span>{item.desc}</span>
+                  <span>{item.desc}</span>{
+                    item.url === "" ? null :
+                      <a href={`/${item.url}`} target="_blank"><span className="outer-link"></span></a>
+                  }
                 </dt>
                 <dd>
                   <ul>
@@ -161,7 +164,9 @@ function Resume(props) {
     <article className="jamie-who-content content-resume fade-in">
       <section className="resume-developer section-jamie-young">
         <div className="resume-developer-wrapper">
-          <div className="developer-div-image"></div>
+          <div className="developer-div-image"
+            style={{ backgroundImage: `url(${info.developer[0].imgURL})` }}
+          ></div>
           <div className="developer-div-info">
             <span className="developer-info-name">{info.developer[0].nameKr}<span>{info.developer[0].nameEn}</span></span>
             <span className="developer-info-title">{info.developer[0].titleEn.toLowerCase()}</span>

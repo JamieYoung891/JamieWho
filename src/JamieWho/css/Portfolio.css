@@ -57,7 +57,7 @@
   display: grid;
   grid-auto-flow: column;
   align-items: flex-start;
-  gap: 5vmin;
+  gap: 6vmin;
 }
 
 .portfolio-template-text-heading {
@@ -70,6 +70,11 @@
   font-size: 4vmin;
   font-weight: 800;
 }
+.portfolio-template-heading-title .outer-link {
+  position: absolute;
+  left: calc(100% + 0.1em);
+}
+
 .portfolio-template-heading-desc {
   font-size: 2.8vmin;
   font-weight: 200;

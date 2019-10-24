@@ -71,3 +71,16 @@
 .close-button::after{
   transform: rotate(-45deg)
 }
+
+.outer-link {
+  display: inline-block;
+  opacity: 0.7;
+  transition: 0.5s opacity;
+
+  width: 0.8em;
+  height: 0.8em;
+
+  background-image: url(../svg/external-link.svg);
+  background-size: contain;
+}
+.outer-link:hover { opacity: 1; }

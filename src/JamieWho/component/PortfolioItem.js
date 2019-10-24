@@ -26,6 +26,10 @@ function PortfolioItem(props) {
       <div className="jamie-who-portfolio-item-title">
         <div className="name">{info.title}</div>
         <div className="desc">{info.desc}</div>
+        {
+          info.url === "" ? null :
+            <div><a href={`/${info.url}`} target="_blank"><span className="outer-link"></span></a></div>
+        }
       </div>
       <div className="jamie-who-portfolio-item-desc">
         <div className="circumstances">
@@ -57,10 +61,10 @@ function PortfolioItem(props) {
         }
       </div>
       <div
-       className="close-button"
-       onClick={()=> toggleHiddenRight(
-         document.getElementsByClassName("jamie-who-portfolio-item")[0]
-       )}
+        className="close-button"
+        onClick={() => toggleHiddenRight(
+          document.getElementsByClassName("jamie-who-portfolio-item")[0]
+        )}
       ></div>
     </section>
   )

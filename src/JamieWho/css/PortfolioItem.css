@@ -38,6 +38,10 @@
   font-size: 120%;
   font-weight: 200;
 }
+.jamie-who-portfolio-item-title .outer-link {
+  margin-left: 1vmin;
+  font-size: 1.2rem;
+}
 
 .jamie-who-portfolio-item-desc {
   /* width: max-content; */

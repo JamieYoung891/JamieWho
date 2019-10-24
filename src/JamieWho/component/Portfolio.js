@@ -41,7 +41,10 @@ function Portfolio({ data }) {
           ></div>
           <div className="portfolio-template-text">
             <div className="portfolio-template-text-heading">
-              <div className="portfolio-template-heading-title">{dataObject.title}</div>
+              <div className="portfolio-template-heading-title">{dataObject.title}{
+                dataObject.url === "" ? null :
+                  <a href={`/${dataObject.url}`} target="_blank"><span className="outer-link"></span></a>
+              }</div>
               <div className="portfolio-template-heading-desc">{dataObject.desc}</div>
             </div>
             <div className="portfolio-template-text-content">
