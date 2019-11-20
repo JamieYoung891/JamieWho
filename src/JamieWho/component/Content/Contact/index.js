@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Contacts.css"
+import "./index.css"
 
 export default function Contacts({ data }) {
   const { contact } = data.info

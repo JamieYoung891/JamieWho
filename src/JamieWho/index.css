@@ -80,7 +80,7 @@
   width: 0.8em;
   height: 0.8em;
 
-  background-image: url(../svg/external-link.svg);
+  background-image: url(./svg/external-link.svg);
   background-size: contain;
 }
 .outer-link:hover { opacity: 1; }

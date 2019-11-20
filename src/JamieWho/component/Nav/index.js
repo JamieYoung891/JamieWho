@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { toggleNav } from "./toggleNav";
 import { indicateNav } from "./indicateNav";
-import "../css/Nav.css"
-import "../css/Nav_responsive.css"
+import "./index.css"
+import "./responsive.css"
 
 function Nav({ data }) {
   const { contentMode, setContentMode, contents, content, itemNum, setItemNum } = data;

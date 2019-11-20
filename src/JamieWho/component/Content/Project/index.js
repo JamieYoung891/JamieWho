@@ -1,6 +1,6 @@
 import React from "react"
-import "../css/PortfolioItem.css"
-import { toggleHiddenRight } from "./toggleHiddenRight";
+import "./index.css"
+import { toggleHiddenRight } from "../../Nav/toggleHiddenRight";
 
 function PortfolioItem(props) {
   const { data, itemNum, setItemNum } = props;

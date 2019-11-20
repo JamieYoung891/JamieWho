@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/Slogan.css";
+import "./index.css";
 
 
 function Slogan(props) {

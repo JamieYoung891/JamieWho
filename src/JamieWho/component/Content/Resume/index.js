@@ -1,5 +1,5 @@
 import React from "react"
-import "../css/Resume.css"
+import "./index.css"
 
 function Resume(props) {
   const { info, portfolio, resume, skills, itemNum, setItemNum } = props.data

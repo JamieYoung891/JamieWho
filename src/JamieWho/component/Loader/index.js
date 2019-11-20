@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../css/LoadIndicator.css'
+import './index.css'
 
 function LoadIndicator(props) {
   const { loadDataNum: max, loadedDataNum: value } = props.data

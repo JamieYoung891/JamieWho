@@ -23,8 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # added by the dev
-/src/Test
-/src/font
-/src/JamieWho/redux
 /.vscode
 .gitignore

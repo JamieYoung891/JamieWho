@@ -1,6 +1,6 @@
 import React from "react"
 import { makeListElm } from "./makeListElm"
-import "./SkillsDescription.css"
+import "./index.css"
 
 export default function SkillsDescription({ data }) {
   const { index, education } = data.skills, { itemNum, setItemNum } = data;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import JamieWho from './JamieWho/JamieWho';
+import JamieWho from './JamieWho/';
 
 function App() {
   const [appMode, setAppMode] = useState("JamieWho");

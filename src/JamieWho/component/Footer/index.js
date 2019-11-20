@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Slogan from "./Slogan"
+import Slogan from "../Content/Slogan"
 
-import "../css/Footer.css";
+import "./index.css";
 
 function Footer(props) {
   const { contact, developer, slogan } = props.data.info

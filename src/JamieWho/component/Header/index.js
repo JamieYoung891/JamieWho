@@ -1,6 +1,6 @@
 import React from 'react';
-import { toggleNav } from "./toggleNav";
-import '../css/Header.css';
+import { toggleNav } from "../Nav/toggleNav";
+import './index.css';
 
 function Header(props) {
   const { contents, info, contentMode, setContentMode } = props.data

@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { useData } from "./hooks/useData"
 
-import "./css/JamieWho.css"
+import "./index.css"
 
-import LoadIndicator from "./component/LoadIndicator"
+import LoadIndicator from "./component/Loader"
 import Header from "./component/Header"
 import Nav from "./component/Nav"
 import Footer from "./component/Footer"
 
-import Resume from "./component/Resume"
-import Portfolio from "./component/Portfolio"
-import Narrative from "./component/Narrative"
-import Contacts from "./component/Contacts"
-import SkillsDescription from './component/description/SkillsDescription'
+import Resume from "./component/Content/Resume"
+import Portfolio from "./component/Content/Portfolio"
+import Narrative from "./component/Content/Narrative"
+import Contact from "./component/Content/Contact"
+import SkillsDescription from './component/Content/Skill'
 
 function JamieWho(props) {
   // const { setAppMode } = props
@@ -79,7 +79,7 @@ function JamieWho(props) {
             components.push(<Narrative key={contentMode} data={__data}></Narrative>)
             break;
           case "contacts":
-            components.push(<Contacts key={contentMode} data={__data}></Contacts>)
+            components.push(<Contact key={contentMode} data={__data}></Contact>)
             break;
 
           case "skillsDescription":
