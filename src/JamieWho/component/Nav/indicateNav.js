@@ -1,5 +1,5 @@
-export const indicateNav = (indicatorClassName, contentMode) => {
-  if (contentMode === ("portfolio" || "contacts")) return
+export const indicateNav = (indicatorClassName, contentName) => {
+  if (contentName === ("portfolio" || "contacts")) return
 
 
 
@@ -13,13 +13,13 @@ export const indicateNav = (indicatorClassName, contentMode) => {
       const sectRect = () => { return triggerElms[i].getBoundingClientRect() };
 
       if (
-        contentMode !== "portfolio" &&
+        contentName !== "portfolio" &&
         sectRect().top <= window.innerHeight / 5 &&
         sectRect().bottom > window.innerHeight / 5
       ) {
         if (!(indicatorElms[i].classList.contains(indicatorClassName)))
           indicatorElms[i].classList.add(indicatorClassName)
-      } else if (contentMode !== "portfolio") {
+      } else if (contentName !== "portfolio") {
         if ((indicatorElms[i].classList.contains(indicatorClassName)))
           indicatorElms[i].classList.remove(indicatorClassName)
       }

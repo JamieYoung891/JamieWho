@@ -4,26 +4,26 @@ const CONTENT_ACTION = {
 }
 
 export const CONTENT_NAME = {
-  INITIAL: "INITIAL",
-  RESUME: "RESUME",
-  PROJECTS: "PROJECTS",
-  NARRATIVE: "NARRATIVE",
-  CONTACTS: "CONTACTS"
+  INTRO: "intro",
+  RESUME: "resume",
+  PROJECTS: "portfolio",
+  NARRATIVE: "narrative",
+  CONTACTS: "contacts"
 }
 
 export const setName_content = payload => ({ type: CONTENT_ACTION.SET_NAME, payload })
 export const resetName_content = () => ({ type: CONTENT_ACTION.RESET_NAME })
 
-const defaultState = { name: CONTENT_NAME.INITIAL }
+const initialState = { name: CONTENT_NAME.INTRO }
 
-export default function content(state = defaultState, { type, payload }) {
+export default function content(state = initialState, { type, payload }) {
   switch (type) {
 
     case CONTENT_ACTION.SET_NAME:
       return { name: payload }
 
     case CONTENT_ACTION.RESET_NAME:
-      return { ...defaultState }
+      return { ...initialState }
 
     default:
       return state

@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import "./index.css"
 
-export default function Contacts({ data }) {
-  const { contact } = data.info
+export default function Contacts() {
+  const { contact } = useSelector(({ data }) => data.info)
 
   const getContactsElm = () => {
     const childElms = []

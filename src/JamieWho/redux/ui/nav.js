@@ -6,12 +6,12 @@ const NAV_ACTION = {
 export const toggleShow_nav = () => ({ type: NAV_ACTION.TOGGLE_SHOW })
 export const toggleOpen_nav = () => ({ type: NAV_ACTION.TOGGLE_OPEN })
 
-const defaultState = {
+const initialState = {
   show: false,
   open: false
 }
 
-export default function nav(state = defaultState, { type }) {
+export default function nav(state = initialState, { type }) {
   switch (type) {
 
     case NAV_ACTION.TOGGLE_SHOW:

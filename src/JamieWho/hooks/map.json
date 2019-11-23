@@ -19,8 +19,8 @@
   "componentData": {
 
     "loadIndicator" : ["loadInfo"],
-    "header": ["info", "contents", "contentMode", "setContentMode"],
-    "nav": ["contents", "content", "contentMode", "setContentMode", "itemNum", "setItemNum"],
+    "header": ["info", "contents"],
+    "nav": ["contents", "content", "itemNum", "setItemNum"],
     "footer": ["info"],
     
     "resume": ["resume", "info", "portfolio", "skills", "itemNum", "setItemNum"],

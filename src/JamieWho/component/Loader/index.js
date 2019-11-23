@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
 import './index.css'
 
-function LoadIndicator(props) {
-  const { loadDataNum: max, loadedDataNum: value } = props.data
+export default function LoadIndicator() {
+  const { max, loaded: value } = useSelector(({ ui }) => ui.loader)
   const [className, setClassName] = useState("load-indicator position-center");
 
   useEffect(() => {
     if (max && max === value) {
-      setClassName( c =>`${c} fade-out`)
+      setClassName(c => `${c} fade-out`)
       setTimeout(() => {
         setClassName(c => `${c} display-none`)
       }, 1500);
@@ -28,5 +29,3 @@ function LoadIndicator(props) {
     return number ? number : 0
   }
 }
-
-export default LoadIndicator;

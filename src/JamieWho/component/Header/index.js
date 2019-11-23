@@ -1,9 +1,15 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { setName_content } from '../../redux/ui/content'
 import { toggleNav } from "../Nav/toggleNav";
 import './index.css';
 
-function Header(props) {
-  const { contents, info, contentMode, setContentMode } = props.data
+function Header() {
+  const dispatch = useDispatch()
+  const setContentName = payload => dispatch(setName_content(payload))
+  const contentMode = useSelector(({ ui }) => ui.content.name)
+
+  const { contents, info } = useSelector(({ data }) => data)
   const data = info.website[0]
 
   function headerClassName() {
@@ -30,7 +36,7 @@ function Header(props) {
               target.classList.add("fade-out")
               setTimeout(() => {
                 target.classList.remove("fade-out")
-                setContentMode(item.name)
+                setContentName(item.name)
               }, 1300);
             }}
           >{item.title}</li>

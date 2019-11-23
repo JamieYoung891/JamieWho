@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-
-import { createStore } from 'redux'
-import rootReducer from './JamieWho/redux'
 import { Provider } from 'react-redux'
+import store from './JamieWho/redux'
 
 import JamieWho from './JamieWho/';
-
-const theStore = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__
-  && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
 
 function App() {
   const [appMode, setAppMode] = useState("JamieWho");
@@ -23,7 +15,7 @@ function App() {
   }
 
   return (
-    <Provider store={theStore}>
+    <Provider store={store}>
       {chooseApp(appMode)}
     </Provider>
   )

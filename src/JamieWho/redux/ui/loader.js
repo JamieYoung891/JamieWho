@@ -1,46 +1,31 @@
 const LOADER_ACTION = {
-  SET_MAX:
-    'jamieWho/ui/loader/SET:max',
-  SET_LOADED:
-    'jamieWho/ui/loader/SET:loaded',
-  TOGGLE_IS_FINISHED:
-    'jamieWho/ui/loader/TOGGLE:isFinished',
-  START:
-    'jamieWho/ui/loader/START',
-  END:
-    'jamieWho/ui/loader/END',
+  SET: {
+    MAX:
+      'jamieWho/ui/loader/START',
+    LOADED:
+      'jamieWho/ui/loader/SET:loaded',
+  }
 }
 
-export const set_Max_loader = payload => ({ type: LOADER_ACTION.SET_MAX, payload })
-export const set_Loaded_loader = payload => ({ type: LOADER_ACTION.SET_LOADED, payload })
-export const toggle_IsFinished_loader = () => ({ type: LOADER_ACTION.TOGGLE_IS_FINISHED })
-export const start_loader = () => ({ type: LOADER_ACTION.START })
-export const end_loader = () => ({ type: LOADER_ACTION.END })
-
-const defaultState = {
-  max: undefined,
-  loaded: undefined,
-  show: false,
-  isFinished: false
+export const actionCreator_loader = {
+  set: {
+    max: max => ({ type: LOADER_ACTION.SET.MAX, payload: max }),
+    loaded: loaded => ({ type: LOADER_ACTION.SET.LOADED, payload: loaded }),
+  }
 }
 
-export default function loader(state = defaultState, { type, payload }) {
+const initialState = {
+  max: null,
+  loaded: null,
+}
+
+export default function loader(state = initialState, { type, payload }) {
   switch (type) {
 
-    case LOADER_ACTION.START:
-      return { ...defaultState, show: true }
-
-    case LOADER_ACTION.END:
-      return { ...defaultState, show: false }
-
-    case LOADER_ACTION.SET_MAX:
-      return { ...state, max: payload }
-
-    case LOADER_ACTION.SET_LOADED:
+    case LOADER_ACTION.SET.MAX:
+      return { max: payload, loaded: 0 }
+    case LOADER_ACTION.SET.LOADED:
       return { ...state, loaded: payload }
-
-    case LOADER_ACTION.TOGGLE_IS_FINISHED:
-      return { ...state, isFinished: !state.isFinished }
 
     default:
       return state

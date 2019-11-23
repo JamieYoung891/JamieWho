@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useData } from "./hooks/useData"
+import useData from "./hooks/useData"
+import { useSelector } from 'react-redux'
 
 import "./index.css"
 
@@ -9,27 +10,27 @@ import Nav from "./component/Nav"
 import Footer from "./component/Footer"
 
 import Resume from "./component/Content/Resume"
-import Portfolio from "./component/Content/Portfolio"
+import Portfolio from "./component/Content/Projects"
 import Narrative from "./component/Content/Narrative"
-import Contact from "./component/Content/Contact"
+import Contact from "./component/Content/Contacts"
 import SkillsDescription from './component/Content/Skill'
 
 function JamieWho(props) {
-  // const { setAppMode } = props
-  const [contentMode, setContentMode] = useState("intro");
+  const contentName = useSelector(({ ui }) => ui.content.name)
+
   const { data, loadInfo } = useData(); // getData from Google Spreadsheet using Tabletop
-  const [itemNum, setItemNum] = useState({portfolio: 0, skills: false});
+  const [itemNum, setItemNum] = useState({ portfolio: 0, skills: false });
 
   const componentInserter = () => {
     if (loadInfo.isDataReady) {
       const componentNames = [], components = [];
 
-      if (contentMode === "intro") componentNames.push("header")
-      else if (contentMode === "contacts") Object.assign(componentNames, ["header", "nav", "content"])
+      if (contentName === "intro") componentNames.push("header")
+      else if (contentName === "contacts") Object.assign(componentNames, ["header", "nav", "content"])
       else Object.assign(componentNames, data.layout);
 
       componentNames.forEach(componentName => {
-        if (componentName === "content") componentName = contentMode;
+        if (componentName === "content") componentName = contentName;
 
         const __data = {}, dataNames = data.componentData[componentName];
         for (let i = 0; i < dataNames.length; i++) {
@@ -37,15 +38,12 @@ function JamieWho(props) {
 
           const key = dataNames[i];
           switch (key) {
-            case "contentMode": item = contentMode; break;
-            case "setContentMode": item = setContentMode; break;
-
             case "itemNum": item = itemNum; break;
             case "setItemNum": item = setItemNum; break;
 
             case "content":
-              if (!data[contentMode]) break;
-              else item = data[contentMode]
+              if (!data[contentName]) break;
+              else item = data[contentName]
               break;
 
             default: item = data[key]
@@ -70,16 +68,16 @@ function JamieWho(props) {
           case "intro":
             break;
           case "resume":
-            components.push(<Resume key={contentMode} data={__data}></Resume>)
+            components.push(<Resume key={contentName} data={__data}></Resume>)
             break;
           case "portfolio":
-            components.push(<Portfolio key={contentMode} data={__data}></Portfolio>)
+            components.push(<Portfolio key={contentName} data={__data}></Portfolio>)
             break;
           case "narrative":
-            components.push(<Narrative key={contentMode} data={__data}></Narrative>)
+            components.push(<Narrative key={contentName} data={__data}></Narrative>)
             break;
           case "contacts":
-            components.push(<Contact key={contentMode} data={__data}></Contact>)
+            components.push(<Contact key={contentName} data={__data}></Contact>)
             break;
 
           case "skillsDescription":
@@ -97,7 +95,7 @@ function JamieWho(props) {
   }
 
   return <div className="jamie-who">
-    <LoadIndicator data={loadInfo}></LoadIndicator>
+    <LoadIndicator />
     {componentInserter()}
   </div>
 

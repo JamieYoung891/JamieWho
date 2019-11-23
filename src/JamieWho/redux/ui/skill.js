@@ -8,12 +8,12 @@ export const setNum_skill = payload => ({ type: SKILL_ACTION.SET_NUM, payload })
 export const resetNum_skill = () => ({ type: SKILL_ACTION.RESET_NUM })
 export const toggleOpen_skill = () => ({ type: SKILL_ACTION.TOGGLE_OPEN })
 
-const defaultState = {
+const initialState = {
   num: undefined,
   open: false
 }
 
-export default function skill(state = defaultState, { type, payload }) {
+export default function skill(state = initialState, { type, payload }) {
   switch (type) {
     
     case SKILL_ACTION.SET_NUM:

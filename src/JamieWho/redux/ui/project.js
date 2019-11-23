@@ -8,12 +8,12 @@ export const setNum_project = payload => ({ type: PROJECT_ACTION.SET_NUM, payloa
 export const resetNum_project = () => ({ type: PROJECT_ACTION.RESET_NUM })
 export const toggleOpen_project = () => ({ type: PROJECT_ACTION.TOGGLE_OPEN })
 
-const defaultState = {
+const initialState = {
   num: undefined,
   open: false
 }
 
-export default function project(state = defaultState, { type, payload }) {
+export default function project(state = initialState, { type, payload }) {
   switch (type) {
     
     case PROJECT_ACTION.SET_NUM:

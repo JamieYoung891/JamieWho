@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { setName_content} from '../../redux/ui/content'
+
 import { toggleNav } from "./toggleNav";
 import { indicateNav } from "./indicateNav";
 import "./index.css"
 import "./responsive.css"
 
 function Nav({ data }) {
-  const { contentMode, setContentMode, contents, content, itemNum, setItemNum } = data;
+  const dispatch = useDispatch()
+  const setContentName = payload => dispatch(setName_content(payload))
+  const contentName = useSelector(({ui}) => ui.content.name)
+
+  const { contents, content, itemNum, setItemNum } = data;
   const root = document.getElementById("root");
 
   const className = {
@@ -18,14 +25,14 @@ function Nav({ data }) {
 
     set: {
 
-      list: (contentName) => { return !contentName ? "nav-main-contents" : "nav-sub-contents" },
+      list: (__contentName) => { return !__contentName ? "nav-main-contents" : "nav-sub-contents" },
 
-      item: (contentName, i, itemName) => {
+      item: (__contentName, i, itemName) => {
         let __className, trg = className.trigger;
 
-        if (!contentName) {
+        if (!__contentName) {
           __className = "nav-main-item button nav-main-item-" + i
-          if (itemName === contentMode) __className += " " + trg.mainCurrent
+          if (itemName === contentName) __className += " " + trg.mainCurrent
 
         } else __className = "nav-sub-item button nav-sub-item-" + i
 
@@ -35,7 +42,7 @@ function Nav({ data }) {
       nav: () => {
         const trg = className.trigger;
 
-        switch (contentMode) {
+        switch (contentName) {
           case "intro":
           case "contacts":
             return trg.hide
@@ -49,14 +56,14 @@ function Nav({ data }) {
 
   const
 
-    toContent = (contentName) => {
-      setContentMode(contentName);
+    toContent = (__contentName) => {
+      setContentName(__contentName);
       toggleNav();
       document.getElementById("root").scrollTo(0, 0);
     },
 
     toItem = (itemName) => {
-      switch (contentMode) {
+      switch (contentName) {
         case "portfolio":
           for (let i = 0; i < content.index.length; i++)
             if (content.index[i].name === itemName) {
@@ -82,11 +89,11 @@ function Nav({ data }) {
     }
 
 
-  const makeList = (contentName) => {
+  const makeList = (__contentName) => {
     let itemList = [], data;
 
-    if (contentName && !content) { } else {
-      !contentName ? data = contents : data = content.index
+    if (__contentName && !content) { } else {
+      !__contentName ? data = contents : data = content.index
 
       for (let i = 0; i < data.length; i++) {
         const itemData = data[i];
@@ -94,9 +101,9 @@ function Nav({ data }) {
         itemList.push(
           <li
             key={i}
-            className={className.set.item(contentName, i, itemData.name)}
+            className={className.set.item(__contentName, i, itemData.name)}
             onClick={
-              contentName ?
+              __contentName ?
                 () => toItem(itemData.name) :
                 () => toContent(itemData.name)
             }
@@ -108,7 +115,7 @@ function Nav({ data }) {
     }
 
     return (
-      <ul className={className.set.list(contentName)}>
+      <ul className={className.set.list(__contentName)}>
         {itemList}
       </ul>
     )
@@ -118,14 +125,14 @@ function Nav({ data }) {
 
   useEffect(() => { // indicateNave onScroll
     const root = document.getElementById("root"),
-      eventFunction = () => indicateNav(className.trigger.subCurrent, contentMode)
+      eventFunction = () => indicateNav(className.trigger.subCurrent, contentName)
     root.addEventListener("scroll", eventFunction)
 
     return function remove() { root.removeEventListener("scroll", eventFunction) }
-  }, [contentMode, className.trigger.subCurrent])
+  }, [contentName, className.trigger.subCurrent])
 
   useEffect(() => { // indicateNave onClick forPortfolio
-    if (contentMode !== "portfolio") return
+    if (contentName !== "portfolio") return
 
     const indicatorElms = document.getElementsByClassName("nav-sub-contents")[0].children,
       indicatorClassName = className.trigger.subCurrent;
@@ -140,11 +147,11 @@ function Nav({ data }) {
           indicatorElms[i].classList.remove(indicatorClassName)
       }
     }
-  }, [contentMode, itemNum, className.trigger.subCurrent])
+  }, [contentName, itemNum, className.trigger.subCurrent])
 
   useEffect(() => { // indicateNav reset onChange ofContentMode
     const navSubContents = document.getElementsByClassName("nav-sub-contents")[0];
-    if (navSubContents.childElementCount === 0 || contentMode === "portfolio") return
+    if (navSubContents.childElementCount === 0 || contentName === "portfolio") return
 
 
     const indicatorElms = navSubContents.children,
@@ -160,7 +167,7 @@ function Nav({ data }) {
           indicatorElms[i].classList.remove(indicatorClassName)
       }
     }
-  }, [className.trigger.subCurrent, contentMode])
+  }, [className.trigger.subCurrent, contentName])
 
 
 
@@ -173,7 +180,7 @@ function Nav({ data }) {
         >
           <span className="nav-logo-txt">J</span>
         </div>
-        {makeList(contentMode)}
+        {makeList(contentName)}
         {makeList()}
         <div
           className="nav-close close-button"

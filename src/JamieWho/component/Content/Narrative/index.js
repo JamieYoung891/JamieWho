@@ -1,7 +1,7 @@
 import React from 'react';
 import "./index.css";
 
-import Portfolio from "../Portfolio"
+import Portfolio from "../Projects"
 
 function Narrative({ data }) {
   const { narrative, skills, itemNum, setItemNum } = data;

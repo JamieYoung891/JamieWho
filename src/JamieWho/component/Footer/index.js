@@ -1,11 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 
 import Slogan from "../Content/Slogan"
 
 import "./index.css";
 
-function Footer(props) {
-  const { contact, developer, slogan } = props.data.info
+function Footer() {
+  const { contact, developer, slogan } = useSelector(({ data }) => data.info)
 
   const contacts = () => {
     const els = [];
