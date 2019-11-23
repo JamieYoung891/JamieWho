@@ -6,7 +6,7 @@ import Slogan from "../Content/Slogan"
 import "./index.css";
 
 function Footer() {
-  const { contact, developer, slogan } = useSelector(({ data }) => data.info)
+  const { contact, developer } = useSelector(({ data }) => data.info)
 
   const contacts = () => {
     const els = [];
@@ -27,7 +27,7 @@ function Footer() {
 
   return (
     <footer className="jamie-who-footer">
-      <Slogan data={slogan}></Slogan>
+      <Slogan />
       <section className="footer-info">
         <div className="footer-info-wrapper">
           <div className="info-copyright">

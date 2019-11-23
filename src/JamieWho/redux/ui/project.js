@@ -1,29 +1,24 @@
 const PROJECT_ACTION = {
-  SET_NUM: 'jamieWho/ui/project/SET_NUM',
-  RESET_NUM: 'jamieWho/ui/project/RESET_NUM',
-  TOGGLE_OPEN: 'jamieWho/ui/project/TOGGLE_OPEN'
+  ENTER: 'jamieWho/ui/project/ENTER',
+  LEAVE: 'jamieWho/ui/project/LEAVE'
 }
 
-export const setNum_project = payload => ({ type: PROJECT_ACTION.SET_NUM, payload })
-export const resetNum_project = () => ({ type: PROJECT_ACTION.RESET_NUM })
-export const toggleOpen_project = () => ({ type: PROJECT_ACTION.TOGGLE_OPEN })
+export const enterProject = payload => ({ type: PROJECT_ACTION.ENTER, payload })
+export const leaveProject = () => ({ type: PROJECT_ACTION.LEAVE })
 
 const initialState = {
-  num: undefined,
-  open: false
+  name: 0,
+  toShow: false
 }
 
 export default function project(state = initialState, { type, payload }) {
   switch (type) {
-    
-    case PROJECT_ACTION.SET_NUM:
-      return { ...state, num: payload }
 
-    case PROJECT_ACTION.RESET_NUM:
-      return { ...state, num: undefined }
+    case PROJECT_ACTION.ENTER:
+      return { name: payload, toShow: true }
 
-    case PROJECT_ACTION.TOGGLE_OPEN:
-      return { ...state, open: !state.open }
+    case PROJECT_ACTION.LEAVE:
+      return { ...state, toShow: false }
 
     default:
       return state

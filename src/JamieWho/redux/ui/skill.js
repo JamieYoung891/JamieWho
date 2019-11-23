@@ -1,30 +1,25 @@
 const SKILL_ACTION = {
-  SET_NUM: 'jamieWho/ui/skill/SET_NUM',
-  RESET_NUM: 'jamieWho/ui/skill/RESET_NUM',
-  TOGGLE_OPEN: 'jamieWho/ui/skill/TOGGLE_OPEN'
+  ENTER: 'jamieWho/ui/skill/ENTER',
+  LEAVE: 'jamieWho/ui/skill/LEAVE'
 }
 
-export const setNum_skill = payload => ({ type: SKILL_ACTION.SET_NUM, payload })
-export const resetNum_skill = () => ({ type: SKILL_ACTION.RESET_NUM })
-export const toggleOpen_skill = () => ({ type: SKILL_ACTION.TOGGLE_OPEN })
+export const enterSkill = payload => ({ type: SKILL_ACTION.ENTER, payload })
+export const leaveSkill = () => ({ type: SKILL_ACTION.LEAVE })
 
 const initialState = {
-  num: undefined,
-  open: false
+  name: null,
+  toShow: false
 }
 
 export default function skill(state = initialState, { type, payload }) {
   switch (type) {
-    
-    case SKILL_ACTION.SET_NUM:
-      return { ...state, num: payload }
-      
-    case SKILL_ACTION.RESET_NUM:
-      return { ...state, num: undefined }
 
-    case SKILL_ACTION.TOGGLE_OPEN:
-      return { ...state, open: !state.open }
-      
+    case SKILL_ACTION.ENTER:
+      return { name: payload, toShow: true }
+
+    case SKILL_ACTION.LEAVE:
+      return { ...state, toShow: false }
+
     default:
       return state
   }

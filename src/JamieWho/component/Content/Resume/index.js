@@ -1,8 +1,11 @@
 import React from "react"
+import { useSelector, useDispatch } from 'react-redux'
+import { enterSkill } from '../../../redux/ui/skill'
 import "./index.css"
 
-function Resume(props) {
-  const { info, portfolio, resume, skills, itemNum, setItemNum } = props.data
+export default function Resume() {
+  const { info, portfolio, resume, skills } = useSelector(({ data }) => data)
+  const dispatch = useDispatch()
 
   const contactList = () => {
     const els = [], data = info.contact;
@@ -52,7 +55,7 @@ function Resume(props) {
                   <span>{item.title}</span>
                   <span>{item.desc}</span>{
                     item.url === "" ? null :
-                      <a href={`/${item.url}`} target="_blank"><span className="outer-link"></span></a>
+                      <a href={`/${item.url}`} target="_blank" rel="noopener noreferrer"><span className="outer-link"></span></a>
                   }
                 </dt>
                 <dd>
@@ -82,7 +85,7 @@ function Resume(props) {
               categoryItemElmsArray.push(
                 <li
                   key={`${key}-${i}-${j}`}
-                  onClick={() => setItemNum(Object.assign({}, itemNum, { skills: item.name }))}
+                  onClick={() => dispatch(enterSkill(item.name))}
                   className="button"
                 >
                   {(() => {
@@ -180,5 +183,3 @@ function Resume(props) {
     </article>
   )
 }
-
-export default Resume;

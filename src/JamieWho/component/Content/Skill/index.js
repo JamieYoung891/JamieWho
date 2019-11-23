@@ -1,12 +1,17 @@
 import React from "react"
+import { useSelector, useDispatch } from 'react-redux'
+import { leaveSkill } from '../../../redux/ui/skill'
+
 import { makeListElm } from "./makeListElm"
 import "./index.css"
 
-export default function SkillsDescription({ data }) {
-  const { index, education } = data.skills, { itemNum, setItemNum } = data;
+export default function SkillsDescription() {
+  const { index, education } = useSelector(({ data }) => data.skills)
+  const { name, toShow } = useSelector(({ ui }) => ui.skill);
+  const dispatch = useDispatch()
 
-  const basicData = index.filter(o => o.name === itemNum.skills)[0],
-    eduData = education.filter(o => o.skill === itemNum.skills);
+  const basicData = index.filter(o => o.name === name)[0],
+    eduData = education.filter(o => o.skill === name);
 
   // const projectElms = makeListElm("Education", eduData)
   const eduElms = makeListElm("Education", eduData)
@@ -23,7 +28,7 @@ export default function SkillsDescription({ data }) {
       id="technical-skills-description"
       className={
         `jamie-who-description technical-skills-description ${
-        basicData ? "description-show" : "description-hide"
+        toShow ? "description-show" : "description-hide"
         }`
       }
     ><div className="wrapper">
@@ -50,11 +55,7 @@ export default function SkillsDescription({ data }) {
           onClick={
             () => {
               document.getElementById("technical-skills-description").classList.replace("description-show", "description-hide");
-              setTimeout(() => {
-                setItemNum(
-                  Object.assign({}, itemNum, { skills: false })
-                )
-              }, 500);
+              setTimeout(() => { dispatch(leaveSkill()) }, 500);
             }
           }
         ></div>

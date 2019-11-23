@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { enterSkill } from '../../../redux/ui/skill'
+
 import "./index.css";
 
 import Portfolio from "../Projects"
 
-function Narrative({ data }) {
-  const { narrative, skills, itemNum, setItemNum } = data;
+function Narrative() {
+  const { narrative, skills } = useSelector(({ data }) => data);
+  const dispatch = useDispatch()
 
   const makeSection = () => {
 
@@ -44,11 +48,7 @@ function Narrative({ data }) {
               <li
                 key={`${item.sentence}-${i}`}
                 className={"narrative-section-skills-list-item skills-list-item button"}
-                onClick={
-                  () => setItemNum(
-                    Object.assign({}, itemNum, { skills: list[i].name })
-                  )
-                }
+                onClick={() => dispatch(enterSkill(list[i].name))}
               >{list[i].em ?
                 <em>{list[i].title}</em> :
                 <span>{list[i].title}</span>}
@@ -120,7 +120,7 @@ function Narrative({ data }) {
       elms.push(templete(sectionInfoData[i]))
 
     elms.push(
-      <Portfolio key="portfolio" data={data}></Portfolio>
+      <Portfolio key="portfolio" />
     );
 
     return elms

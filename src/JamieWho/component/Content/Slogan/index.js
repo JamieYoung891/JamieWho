@@ -1,9 +1,10 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 import "./index.css";
 
 
-function Slogan(props) {
-  const slogan = props.data;
+function Slogan() {
+  const slogan = useSelector(({ data }) => data.info.slogan);
 
   const getSlogan = categoryName => {
     let els = [];
@@ -18,9 +19,9 @@ function Slogan(props) {
           <em>{o.em}</em>{o.coda}
         </span>
       )
-      
+
       if (i !== data.length - 1)
-      els.push(<span key={"spacer" + i} className="slogan-spacer"> </span>)
+        els.push(<span key={"spacer" + i} className="slogan-spacer"> </span>)
     }
 
     return (

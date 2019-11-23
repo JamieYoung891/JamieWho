@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { setName_content} from '../../redux/ui/content'
+import { setName_content } from '../../redux/ui/content'
+import { enterProject } from '../../redux/ui/project'
 
 import { toggleNav } from "./toggleNav";
 import { indicateNav } from "./indicateNav";
 import "./index.css"
 import "./responsive.css"
 
-function Nav({ data }) {
+function Nav() {
+  const contentName = useSelector(({ ui }) => ui.content.name)
+  const projectName = useSelector(({ ui }) => ui.project.name)
+  const { contents, [contentName]: content } = useSelector(({ data }) => data)
   const dispatch = useDispatch()
   const setContentName = payload => dispatch(setName_content(payload))
-  const contentName = useSelector(({ui}) => ui.content.name)
-
-  const { contents, content, itemNum, setItemNum } = data;
-  const root = document.getElementById("root");
+  const root = document.getElementById("root")
 
   const className = {
     trigger: {
@@ -66,9 +67,7 @@ function Nav({ data }) {
       switch (contentName) {
         case "portfolio":
           for (let i = 0; i < content.index.length; i++)
-            if (content.index[i].name === itemName) {
-              setItemNum(Object.assign({}, itemNum, { portfolio: i }));
-            }
+            if (content.index[i].name === itemName) dispatch(enterProject(i))
           break;
 
         default:
@@ -139,7 +138,7 @@ function Nav({ data }) {
 
     for (let i = 0; i < indicatorElms.length; i++) {
 
-      if (itemNum.portfolio === i) {
+      if (projectName === i) {
         if (!(indicatorElms[i].classList.contains(indicatorClassName)))
           indicatorElms[i].classList.add(indicatorClassName)
       } else {
@@ -147,7 +146,7 @@ function Nav({ data }) {
           indicatorElms[i].classList.remove(indicatorClassName)
       }
     }
-  }, [contentName, itemNum, className.trigger.subCurrent])
+  }, [contentName, projectName, className.trigger.subCurrent])
 
   useEffect(() => { // indicateNav reset onChange ofContentMode
     const navSubContents = document.getElementsByClassName("nav-sub-contents")[0];

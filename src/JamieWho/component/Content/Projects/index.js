@@ -1,12 +1,15 @@
 import React from "react"
+import { useSelector, useDispatch } from 'react-redux'
+import { enterProject } from '../../../redux/ui/project'
 import "./index.css"
 
 import PortfolioItem from "../Project"
 import { toggleHiddenRight } from "../../Nav/toggleHiddenRight";
 
-function Portfolio({ data }) {
-  const { itemNum, setItemNum, portfolio } = data
-  const { info } = portfolio;
+export default function Projects() {
+  const { info } = useSelector(({ data }) => data.portfolio);
+  const name = useSelector(({ ui }) => ui.project.name)
+  const dispatch = useDispatch();
 
   const
     buttons = () => {
@@ -16,9 +19,9 @@ function Portfolio({ data }) {
           <li
             key={`button-${i}`}
             className={`portfolio-item button ${
-              (itemNum.portfolio === i) ? "ticked" : "unticked"
+              (name === i) ? "ticked" : "unticked"
               }`}
-            onClick={() => setItemNum(Object.assign({}, itemNum, { portfolio: i }))}
+            onClick={() => dispatch(enterProject(i))}
           ></li>
         )
       }
@@ -64,10 +67,8 @@ function Portfolio({ data }) {
   return (
     <article className="jamie-who-content content-portfolio fade-in">
       {buttons()}
-      {template(info[itemNum.portfolio])}
-      <PortfolioItem data={portfolio} itemNum={itemNum.portfolio} setItemNum={setItemNum}></PortfolioItem>
+      {template(info[name])}
+      <PortfolioItem />
     </article>
   )
 }
-
-export default Portfolio
