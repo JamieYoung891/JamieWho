@@ -14,7 +14,7 @@ export const CONTENT_NAME = {
 export const setName_content = payload => ({ type: CONTENT_ACTION.SET_NAME, payload })
 export const resetName_content = () => ({ type: CONTENT_ACTION.RESET_NAME })
 
-const initialState = { name: CONTENT_NAME.PROJECTS }
+const initialState = { name: CONTENT_NAME.INTRO }
 
 export default function content(state = initialState, { type, payload }) {
   switch (type) {

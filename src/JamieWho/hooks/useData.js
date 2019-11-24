@@ -1,40 +1,58 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { DATA_ACTION } from '../redux/data'
 import { actionCreator_loader } from '../redux/ui/loader'
 import Tabletop from 'tabletop'
-import map from './map'
+
+const contents = [
+  { "name": "resume", "title": "이력서" },
+  { "name": "portfolio", "title": "포트폴리오" },
+  { "name": "narrative", "title": "이야기" },
+  { "name": "contacts", "title": "연락처" }
+]
+
+const dataKey = {
+  info: "1QyN6ObNJWxUukoGc_zy_FkjuWKKE656JW4HGsk1L4Pc",
+  resume: "11MxX_AUm6muovkobVb0BhsWlFs5BANi2XNsdITYHvW8",
+  skills: "179EZYW-v8GNDRHCfYnLbN_lZSlRebj3kwtmzmBKjmNE",
+  portfolio: "1oYPYrTDTU454ywq1qY2cl-VFU4EvTsNgq9GfMYMF2hQ",
+  narrative: "1GE9h7z614wH6zjGVhy8oWaHN4-UGkQTCaqDLAVcXJHM"
+}
+
 
 
 export default function useData() {
   const dispatch = useDispatch()
 
-  const [data, setData] = useState(false);
-
-  const [loadDataNum, setLoadDataNum] = useState(0);
-  const [loadedDataNum, setLoadedDataNum] = useState(0);
-
   useEffect(() => {
-    const { contents, componentData, layout, dataKey } = map
-    const dataNum = Object.keys(dataKey).length; setLoadDataNum(dataNum);
-    dispatch(actionCreator_loader.set.max(dataNum));
-
-
-
-    let __data = { contents, componentData, layout }
 
     dispatch({
       type: DATA_ACTION.GET_DATA.SUCCESS,
-      payload: __data
+      payload: { contents }
     })
 
+
+
+    const max = Object.keys(dataKey).length;
     let loaded = 0;
+    dispatch(actionCreator_loader.set.max(max));
 
+    for (let name in dataKey) {
+      let key = dataKey[name]
+      getData(key, name)
+    }
 
-    const getData = (key, name) => {
+    function getData(key, name) {
+
+      Tabletop.init({
+        key,
+        simpleSheet: false,
+        callback: data => dataExtractor(data)
+      })
 
       const dataExtractor = data => {
-        let dataExtracted = {}, keys = Object.keys(data);
+        const dataExtracted = {}
+        const keys = Object.keys(data);
 
         keys.forEach(key => dataExtracted[key] = data[key].elements)
 
@@ -42,42 +60,9 @@ export default function useData() {
           type: DATA_ACTION.GET_DATA.SUCCESS,
           payload: { [name]: dataExtracted }
         })
+
+        dispatch(actionCreator_loader.set.loaded(++loaded))
       }
-
-      return Tabletop.init({
-        key,
-        simpleSheet: false,
-        callback: data => dataExtractor(data)
-      })
     }
-
-    const dataInsertor = (name, data) => {
-      let container = {}, keys = Object.keys(data);
-
-      keys.forEach(key => container[key] = data[key].elements)
-      __data[name] = container;
-      setLoadedDataNum(++loaded);
-      dispatch(actionCreator_loader.set.loaded(loaded))
-    }
-
-    for (let name in dataKey) {
-      let key = dataKey[name]
-      getData(key, name)
-      Tabletop.init({
-        key: key, simpleSheet: false,
-        callback: (data) => { dataInsertor(name, data) }
-      })
-    }
-
-    setData(__data)
   }, [])
-
-  return {
-    data: data,
-    loadInfo: {
-      loadDataNum: loadDataNum,
-      loadedDataNum: loadedDataNum,
-      isDataReady: loadDataNum && loadDataNum === loadedDataNum
-    }
-  }
 }

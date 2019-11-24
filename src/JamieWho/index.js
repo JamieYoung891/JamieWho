@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useData from "./hooks/useData"
 import { useSelector } from 'react-redux'
 
@@ -15,80 +15,56 @@ import Narrative from "./component/Content/Narrative"
 import Contact from "./component/Content/Contacts"
 import SkillsDescription from './component/Content/Skill'
 
-function JamieWho(props) {
-  const contentName = useSelector(({ ui }) => ui.content.name)
-
-  const { data, loadInfo } = useData(); // getData from Google Spreadsheet using Tabletop
-  const [itemNum, setItemNum] = useState({ portfolio: 0, skills: false });
+function JamieWho() {
+  const { content: { name: contentName }, loader: { max, loaded } } = useSelector(({ ui }) => ui)
+  useData();
 
   const componentInserter = () => {
-    if (loadInfo.isDataReady) {
+    if (max && max === loaded) {
       const componentNames = [], components = [];
 
       if (contentName === "intro") componentNames.push("header")
       else if (contentName === "contacts") Object.assign(componentNames, ["header", "nav", "content"])
-      else Object.assign(componentNames, data.layout);
+      else Object.assign(componentNames, ["header", "nav", "content", "footer", "skillsDescription"])
 
       componentNames.forEach(componentName => {
         if (componentName === "content") componentName = contentName;
 
-        const __data = {}, dataNames = data.componentData[componentName];
-        for (let i = 0; i < dataNames.length; i++) {
-          let item = false;
-
-          const key = dataNames[i];
-          switch (key) {
-            case "itemNum": item = itemNum; break;
-            case "setItemNum": item = setItemNum; break;
-
-            case "content":
-              if (!data[contentName]) break;
-              else item = data[contentName]
-              break;
-
-            default: item = data[key]
-              break;
-          }
-
-          __data[key] = item
-        }
-
         switch (componentName) {
 
           case "header":
-            components.push(<Header key={componentName} data={__data}></Header>)
+            components.push(<Header key={componentName} />)
             break;
           case "nav":
-            components.push(<Nav key={componentName} data={__data}></Nav>)
+            components.push(<Nav key={componentName} />)
             break;
           case "footer":
-            components.push(<Footer key={componentName} data={__data}></Footer>)
+            components.push(<Footer key={componentName} />)
             break;
 
           case "intro":
             break;
           case "resume":
-            components.push(<Resume key={contentName} data={__data}></Resume>)
+            components.push(<Resume key={contentName} />)
             break;
           case "portfolio":
-            components.push(<Portfolio key={contentName} data={__data}></Portfolio>)
+            components.push(<Portfolio key={contentName} />)
             break;
           case "narrative":
-            components.push(<Narrative key={contentName} data={__data}></Narrative>)
+            components.push(<Narrative key={contentName} />)
             break;
           case "contacts":
-            components.push(<Contact key={contentName} data={__data}></Contact>)
+            components.push(<Contact key={contentName} />)
             break;
 
           case "skillsDescription":
-            components.push(<SkillsDescription key={componentNames} data={__data}></SkillsDescription>)
+            components.push(<SkillsDescription key={componentNames} />)
             break;
 
           default:
             break;
         }
       });
-
 
       return components
     } else return
