@@ -64,5 +64,5 @@ export default function useData() {
         dispatch(actionCreator_loader.set.loaded(++loaded))
       }
     }
-  }, [])
+  }, [dispatch])
 }
