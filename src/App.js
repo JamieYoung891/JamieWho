@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Provider } from 'react-redux'
-import store from './JamieWho/redux'
+import store from './Test/redux'
 
-// import JamieWho from './JamieWho/';
+import JamieWho from './JamieWho/';
 // import './reset.css'
 
 
 import Test from './Test'
-import { Reset } from './Test/styled'
+import { Reset } from './Test/components/styled'
 
 
 const APP_MODE = {
@@ -20,13 +20,10 @@ function App() {
 
   function chooseApp(appMode) {
     switch (appMode) {
-      // case "JamieWho":
-      //   return <JamieWho setAppMode={setAppMode} />;
-      case "Test":
-        return [
-          <Reset key="Reset" />,
-          <Test key="Test" />
-        ]
+      case "JamieWho":
+        return <JamieWho />;
+      case APP_MODE.TEST:
+        return <Test key="Test" />
       default:
         return
     }
@@ -34,6 +31,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <Reset key="Reset" />
       {chooseApp(appMode)}
     </Provider>
   )

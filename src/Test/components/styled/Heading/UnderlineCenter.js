@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { color } from './constants';
+import { color } from '../constants';
 
 export default styled.h1`
   width: max-content;

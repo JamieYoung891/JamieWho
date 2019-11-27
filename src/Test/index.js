@@ -3,13 +3,10 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setName_content } from '../JamieWho/redux/ui/content';
 
-import useData from '../JamieWho/hooks/useData'
-import Header from './Header/'
-import HeaderNormal from './Header/HeaderNormal';
-
+import useData from './hooks/useData'
+import Header from './components/Header'
 const Target = () => [
-  <Header key="Header" />
-  // <HeaderNormal key="HeaderNormal" />
+  <Header key="Header" />,
 ]
 
 export default function Test() {
@@ -27,5 +24,5 @@ export default function Test() {
   else
     return <div style={{ "margin": "5vmin auto" }}>loading</div>
 
-  return <Target />
+  // return <Target />
 }
