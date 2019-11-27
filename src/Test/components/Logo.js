@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { constants } from '../styled'
+import { constants } from './styled'
 
 
 const StyledDiv = styled.div`
@@ -29,11 +29,13 @@ const StyledDiv = styled.div`
   span {
     margin: auto;
   }
+
+  ${props => props.css}
 `
 
-export default function Logo({ onClick }) {
+export default function Logo({ onClick, css }) {
   return (
-    <StyledDiv onClick={onClick}>
+    <StyledDiv onClick={onClick} css={css}>
       <span>j</span>
     </StyledDiv>
   )

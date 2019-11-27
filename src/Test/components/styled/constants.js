@@ -3,7 +3,7 @@ import { css } from 'styled-components'
 export const color = {
   primary: {
     // darker: 'hsl(42, 96%, 34%)',
-    // dark: 'hsl(42, 96%, 44%)',
+    dark: 'hsl(42, 96%, 44%)',
     normal: 'hsl(42, 96%, 54%)',
     light: 'hsl(42, 96%, 64%)',
     lighter: 'hsl(42, 96%, 74%)',

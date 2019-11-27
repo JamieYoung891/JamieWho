@@ -33,12 +33,12 @@ export default createGlobalStyle`
     margin-block-end: 0;
   }
 
-  ul {
-    list-style-type: none;
+  ul, ol {
     margin: 0;
     padding: 0;
   }
-
+  
+  ul, ol, li { list-style: none }
   
   @keyframes fade-in {
     0% { opacity: 0 }

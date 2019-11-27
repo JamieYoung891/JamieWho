@@ -1,28 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { Fragment } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setName_content } from '../JamieWho/redux/ui/content';
+import { setContent, CONTENT_NAME } from './redux/ui/content';
 
 import useData from './hooks/useData'
 import Header from './components/Header'
-const Target = () => [
-  <Header key="Header" />,
-]
+
+import Content from './components/Content';
 
 export default function Test() {
+  const contentName = useSelector(({ ui }) => ui.content.name)
 
   // const dispatch = useDispatch();
   // useEffect(() => {
-  //   dispatch(setName_content('narrative'))
+  //   dispatch(setContent('narrative'))
   // }, [dispatch])
 
   useData();
 
   const { max, loaded } = useSelector(({ ui }) => ui.loader)
+
   if (max && max === loaded)
-    return <Target />
+    if (contentName === CONTENT_NAME.INTRO)
+      return <Header />
+
+    else return (
+      <Fragment>
+        <Header />
+        <Content />
+      </Fragment>
+    )
+
   else
     return <div style={{ "margin": "5vmin auto" }}>loading</div>
-
-  // return <Target />
 }

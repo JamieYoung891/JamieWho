@@ -1,24 +1,17 @@
 const NAV_ACTION = {
-  TOGGLE_SHOW: 'jamieWho/ui/nav/TOGGLE_SHOW',
-  TOGGLE_OPEN: 'jamieWho/ui/nav/TOGGLE_OPEN'
+  TOGGLE_TO_OPEN: 'jamieWho/ui/nav/TOGGLE:toOpen'
 }
 
-export const toggleShow_nav = () => ({ type: NAV_ACTION.TOGGLE_SHOW })
-export const toggleOpen_nav = () => ({ type: NAV_ACTION.TOGGLE_OPEN })
+export const toggleNav = () => ({ type: NAV_ACTION.TOGGLE_TO_OPEN })
 
 const initialState = {
-  show: false,
-  open: false
+  toOpen: false
 }
 
 export default function nav(state = initialState, { type }) {
   switch (type) {
-
-    case NAV_ACTION.TOGGLE_SHOW:
-      return { ...state, show: !state.show }
-
-    case NAV_ACTION.TOGGLE_OPEN:
-      return { ...state, open: !state.open }
+    case NAV_ACTION.TOGGLE_TO_OPEN:
+      return { toOpen: !state.toOpen }
 
     default:
       return state

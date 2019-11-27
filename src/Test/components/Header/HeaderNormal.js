@@ -1,24 +1,27 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { toggleOpen_nav } from '../../redux/ui/nav'
+import { toggleNav } from '../../redux/ui/nav'
 import styled from 'styled-components'
 import Logo from '../Logo'
+import Nav from '../Nav'
 
 const StyledDiv = styled.div`
-  padding: 0.5rem;
+  position: fixed;
+  z-index: 100;
 
-  > * { cursor: pointer; }
+  padding: 0.5rem;
 
   ${props => props.css}
 `
 
 export default function HeaderNormal({ setToContent, animation }) {
   const dispatch = useDispatch()
-  const onClick = () => dispatch(toggleOpen_nav())
+  const onClick = () => dispatch(toggleNav())
 
   return (
     <StyledDiv css={animation}>
-      <Logo onClick={onClick} />
+      <Logo onClick={onClick} css="cursor: pointer;" />
+      <Nav setToContent={setToContent} />
     </StyledDiv>
   )
 }
