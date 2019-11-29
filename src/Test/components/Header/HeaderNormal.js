@@ -1,27 +1,45 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { toggleNav } from '../../redux/ui/nav'
 import styled from 'styled-components'
+import ProgressIndicator from './HeaderNormalProgressIndicator'
 import Logo from '../Logo'
-import Nav from '../Nav'
+import Nav from './HeaderNormalNav'
 
-const StyledDiv = styled.div`
+const HeaderOuter = styled.header`
   position: fixed;
+  top: -0.5rem;
   z-index: 100;
+  
+  width: 100%;
 
-  padding: 0.5rem;
+  transition-duration: 0.5s;
+  transition-property: top;
+  
+  > div {
+    width: 100%;
+    max-width: 167vmin;
+    margin: 0 auto;
+
+    > :nth-child(2) { margin: 0.5rem; }
+  }
 
   ${props => props.css}
+  ${props => props.toIndicate && "top: 0;"}
 `
 
 export default function HeaderNormal({ setToContent, animation }) {
+  const { toIndicate } = useSelector(({ ui }) => ui.progressIndicator)
   const dispatch = useDispatch()
   const onClick = () => dispatch(toggleNav())
 
   return (
-    <StyledDiv css={animation}>
-      <Logo onClick={onClick} css="cursor: pointer;" />
-      <Nav setToContent={setToContent} />
-    </StyledDiv>
+    <HeaderOuter css={animation} toIndicate={toIndicate}>
+      <div>
+        <ProgressIndicator />
+        <Logo onClick={onClick} css="cursor: pointer;" />
+        <Nav setToContent={setToContent} />
+      </div>
+    </HeaderOuter>
   )
 }

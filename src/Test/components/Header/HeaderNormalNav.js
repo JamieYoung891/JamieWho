@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleNav } from '../redux/ui/nav'
+import { toggleNav } from '../../redux/ui/nav'
 
 import styled, { css } from 'styled-components'
-import { ContainerFullScreen, constants } from './styled'
-import CloseButton from './CloseButton'
-import { makeListItemArray } from './func'
+import { ContainerFullScreen, constants } from '../styled'
+import CloseButton from '../CloseButton'
+import { makeListItemArray } from '../func'
 
 const Nav = styled(ContainerFullScreen)`
   display: grid;
