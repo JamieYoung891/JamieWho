@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { toggleNav } from '../../redux/ui/nav'
 
 import styled, { css } from 'styled-components'
-import { ContainerFullScreen, constants } from '../styled'
+import { Container, constants } from '../styled'
 import CloseButton from '../CloseButton'
 import { makeListItemArray } from '../func'
 
-const Nav = styled(ContainerFullScreen)`
+const Nav = styled(Container.FullScreen)`
   display: grid;
   grid-auto-flow: row;
   align-items: stretch;

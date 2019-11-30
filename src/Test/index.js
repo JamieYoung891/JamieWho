@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setContent, CONTENT_NAME } from './redux/ui/content';
@@ -11,10 +11,10 @@ import Content from './components/Content';
 export default function Test() {
   const contentName = useSelector(({ ui }) => ui.content.name)
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(setContent('narrative'))
-  // }, [dispatch])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setContent('narrative'))
+  }, [dispatch])
 
   useData();
 

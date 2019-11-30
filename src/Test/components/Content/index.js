@@ -1,10 +1,59 @@
-import React from 'react'
-import { ContainerMaxWidth } from '../styled/Container'
+import React, { Fragment } from 'react'
+
+import { useSelector } from 'react-redux'
+import { CONTENT_NAME } from '../../redux/ui/content'
+
+import styled from 'styled-components'
+import { constants } from '../styled/'
+
+import Contacts from './Contacts'
+import Footer from '../Footer'
+
+
+
+const Section = styled.section`
+  ${props => props.css}
+`
 
 export default function () {
+  const { name: contentName, toFadeOut } = useSelector(({ ui }) => ui.content)
+
+
+
+  let content;
+  const withFooter = _content => (
+    <Fragment>
+      {_content}
+      <Footer />
+    </Fragment>
+  )
+
+  switch (contentName) {
+    case CONTENT_NAME.RESUME:
+      content = withFooter(<div>this is resume</div>)
+      break;
+    case CONTENT_NAME.PROJECTS:
+      content = withFooter(<div>this is projects</div>)
+      break;
+    case CONTENT_NAME.NARRATIVE:
+      content = withFooter(<div>this is narrative</div>)
+      break;
+    case CONTENT_NAME.CONTACTS:
+      content = <Contacts />
+      break;
+    default:
+  }
+
+
+
+  let animation
+  if (!toFadeOut) animation = constants.animation.enterContent
+  else animation = constants.animation.leaveContent
+
+
   return (
-    <ContainerMaxWidth>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio beatae ut sunt nesciunt accusamus, nemo obcaecati velit! Non, temporibus quisquam! Velit dolor reiciendis, architecto reprehenderit in aut tempora ratione, quisquam placeat tempore obcaecati iste ad nisi ducimus quas rem nulla, perspiciatis alias ullam nam. Fugiat incidunt qui eveniet voluptatibus quo corporis consequuntur aspernatur fugit perferendis ullam. Id debitis, velit ut molestiae eveniet dignissimos, saepe incidunt ipsa eligendi iure repellendus dicta quod? Atque harum minima veniam distinctio natus, corporis commodi est dignissimos aut earum, eveniet repudiandae placeat nemo? Dolorum fugiat quasi quod? Veritatis facilis hic accusantium laborum obcaecati adipisci! Illum quasi quo, soluta voluptatum quis, dolore beatae ea cupiditate, praesentium nobis obcaecati saepe. Laudantium architecto nihil aliquid reiciendis earum quo adipisci rerum, perferendis accusantium ipsum. Similique aspernatur culpa blanditiis ipsum nulla doloribus assumenda harum porro eaque tenetur veritatis doloremque, mollitia aut illo sed cum ex odit accusantium ea officiis facere quia. Beatae quos suscipit rem pariatur sunt aspernatur incidunt officia id, quo eum delectus! Sapiente totam assumenda quae non, iste nisi aliquid repellendus quibusdam corporis officiis repellat porro laudantium. Velit doloremque sunt nemo. Nostrum expedita soluta autem optio voluptas nulla atque nihil veritatis, nam eligendi! Dolores consectetur dolorem blanditiis. Minima eos quidem sit. Totam nobis enim consectetur maxime amet nemo doloremque facere beatae minima animi voluptatem fugiat nam est ab quia consequatur, sequi obcaecati quasi in, distinctio error corrupti! Error, quibusdam laudantium? Voluptas perferendis eius placeat facere magni! Assumenda perspiciatis odio omnis consectetur ad odit repellat nesciunt quia, totam accusantium accusamus repudiandae culpa blanditiis quibusdam rerum doloribus consequatur nostrum non illo velit quas tenetur inventore recusandae. Nostrum, tenetur blanditiis? Voluptas voluptatem optio debitis sit totam qui voluptates, necessitatibus earum. Sapiente corporis aut ipsam maxime veritatis sit itaque, pariatur blanditiis quis doloremque incidunt recusandae accusamus vel beatae accusantium dolore distinctio repellendus ad vero natus harum sint optio cumque quibusdam. Eveniet neque odit incidunt, veritatis nostrum a minima rerum velit repellendus illum consectetur adipisci doloremque odio, illo alias aspernatur distinctio ex quo. Tempora expedita ab rerum tenetur voluptatum quia, possimus illo eveniet autem omnis ea officiis nesciunt numquam iusto tempore? Veritatis ipsum magnam similique dicta nostrum amet, aperiam quis asperiores doloribus iusto earum necessitatibus itaque? Suscipit quisquam expedita explicabo dolores dicta dolorum harum consectetur aperiam laudantium deleniti quasi porro, sunt voluptates. Iusto corporis labore, nostrum dolor beatae voluptas omnis placeat ipsa dolores. Atque modi deleniti quidem unde inventore ipsum harum, nobis fugiat error tempore libero totam in molestias ipsa veritatis? Incidunt maiores veritatis sit consectetur, nemo dolor saepe rerum, sequi quis sunt velit nulla, dolore quibusdam magnam? Deleniti praesentium blanditiis iste odit incidunt. Labore tenetur illo nihil cupiditate, minima odio alias vitae eligendi excepturi quia, aperiam rerum in earum ipsam, totam iusto. Ullam tempora libero at eveniet, laboriosam, autem officiis fuga ratione tenetur magnam ut eaque voluptatibus praesentium! Similique necessitatibus eveniet nemo facere repellendus provident, ut doloribus fugit unde non fuga saepe quas quis praesentium dolorem porro? Aliquam, nulla blanditiis expedita fuga ipsa atque aspernatur quis eos perspiciatis reprehenderit tempora, voluptates exercitationem qui.
-    </ContainerMaxWidth>
+    <Section css={animation}>
+      {content}
+    </Section>
   )
 }

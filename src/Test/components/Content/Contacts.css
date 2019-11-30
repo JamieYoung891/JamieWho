@@ -1,0 +1,60 @@
+.content-contacts { height: 100%; }
+.content-contacts > section { height: 50%; display: grid; }
+.content-contacts > section:last-of-type {
+  background: linear-gradient(
+    to top,
+    transparent,
+    transparent,
+    hsl(42, 96%, 88%)
+  );
+}
+
+.content-contacts > section > * {
+  width: 85%;
+  max-width: 133vmin;
+
+  margin: 0 auto;
+}
+.content-contacts > section:first-of-type > * { margin: auto auto 1.4rem; }
+.content-contacts > section:last-of-type > * { margin: 1.4rem auto auto; }
+
+.content-contacts .title {
+  font-size: 3rem;
+  line-height: 1.25;
+}
+.content-contacts .title em {
+  display: block;
+  font-style: normal;
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: #fab617;
+}
+
+.content-contacts > section:last-of-type .title { font-weight: 800; font-size: 3.4rem; }
+.content-contacts > section:last-of-type .title::after { content: ":"; }
+.content-contacts > section:last-of-type .title-text::before,
+.content-contacts > section:last-of-type .title-text::after {
+  color: #fab617;
+  margin: 0 1vmin;
+}
+.content-contacts > section:last-of-type .title-text::before { content: "{"; }
+.content-contacts > section:last-of-type .title-text::after { content: "}"; }
+
+.contacts-info-list {
+  width: max-content;
+  padding: 0;
+  margin: 0 0 0 auto;
+
+  list-style-type: none;
+}
+.contacts-info-list > div:first-of-type {
+  margin-bottom: 1rem;
+}
+.contacts-info-list-item a {
+  color: #fab617;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+
+  line-height: 1.6;
+}

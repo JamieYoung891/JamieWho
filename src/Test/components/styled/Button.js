@@ -1,58 +1,59 @@
-import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import * as constants from './constants'
 
-const StyledButton = styled.li`
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
+const { color: { primary, white } } = constants
 
-  width: 0;
-  padding-left: 0;
+export const Button = styled.button`
+  cursor: pointer;
+
+  display: inline-block;
+  overflow: hidden;
+
+  min-width: 2em;
+  max-width: 2em;
+  height: 2em;
+
+  margin-right: 0.5em;
+
+  font-weight: 800;
+  line-height: 2em;
   color: transparent;
-  font-size: 0;
 
   transition-duration: 0.5s;
-  transition-property: width, padding-left, color;
+  transition-property: max-width, margin-right, color;
 
   ::before {
-    content: "${props => { return props.text && props.text.slice(0, 1).toUpperCase() }}";
+    content: "${props => props.text && props.text.slice(0, 1)}";
 
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
 
-    position: absolute;
-    left: -1.25em;
+    width: 2em;
+    height: 2em;
 
-    width: 2.5em;
-    height: 2.5em;
+    margin-right: 0;
 
     border: none;
-    border-radius: 2em;
+    border-radius: 1em;
 
-    font-size: 1rem;
-    font-weight: 800;
+    text-align: center;
+    color: ${white.normal};
 
-    background-color: ${constants.color.primary.light};
+    background-color: ${primary.lighter};
 
-    color: ${constants.color.white.normal};
+    transition-duration: 0.5s;
+    transition-property: margin-right, background-color;
   }
 
   :hover {
-    width: max-content;
-    padding-left: 2em;
-    font-size: inherit;
-    color: inherit;
+    max-width: 10em;
+    margin-right: 1em;
+    color: ${primary.normal};
+
+    ::before {
+      margin-right: 0.5em;
+      background-color: ${primary.normal}
+    }
   }
 
   ${props => props.css}
 `
-
-export default function Button({ as, css, text }) {
-  return (
-    <Fragment>
-      <StyledButton as={as} css={css} text={text}>{text}</StyledButton>
-    </Fragment>
-  )
-}

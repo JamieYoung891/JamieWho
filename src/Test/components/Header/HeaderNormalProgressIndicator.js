@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setToIndicate, setMax, setValue } from '../../redux/ui/progressIndicator';
 import styled, { css } from 'styled-components'
@@ -40,17 +40,26 @@ export default function ProgressIndicator() {
   const dispatch = useDispatch();
   const root = document.getElementById("root")
 
-  const getMax = () => (root.scrollHeight - root.offsetHeight)
 
-  let _css;
 
-  if (!getMax()) {
-    _css = removeIndicator
-    if (toIndicate) dispatch(setToIndicate(false))
+  const contentName = useSelector(({ ui }) => ui.content.name)
+  let _css = useRef()
 
-  } else if (!toIndicate) dispatch(setToIndicate(true))
+  useEffect(() => {
+    const getMax = () => (root.scrollHeight - root.offsetHeight)
 
-  if (max !== getMax()) dispatch(setMax(getMax()))
+    if (!getMax()) {
+      
+      _css.current = removeIndicator;
+      if (toIndicate) dispatch(setToIndicate(false))
+
+    } else if (!toIndicate) dispatch(setToIndicate(true))
+
+    if (max !== getMax()) dispatch(setMax(getMax()))
+
+  }, [contentName, root.scrollHeight, root.offsetHeight, toIndicate, dispatch, max])
+
+
 
   const getValue = () => Math.floor(root.scrollTop)
   const setValue_onScroll = () => dispatch(setValue(getValue()))
@@ -60,6 +69,8 @@ export default function ProgressIndicator() {
     return () => root.removeEventListener("scroll", setValue_onScroll)
   })
 
+
+  
   return (
     <IndicatorContainer max={max} value={value} css={_css}>
       <div></div>

@@ -8,7 +8,7 @@ export default createGlobalStyle`
     margin: 0;
     
     font-family: 'NanumSquareRound', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     color: ${color.text.normal};
     line-height: 1;
   }
