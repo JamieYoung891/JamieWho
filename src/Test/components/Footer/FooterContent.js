@@ -18,8 +18,10 @@ const FooterContectSection = styled.section`
       display: flex;
       flex-direction: column-reverse;
 
-      > :first-child { font-size: 1.5rem }
-      > :nth-child(2)::after { content:' :' }
+      > :first-child {
+        font-size: 1.6rem;
+        margin-top: 0.1rem;
+      }
     }
   }
 

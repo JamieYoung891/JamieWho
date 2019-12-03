@@ -13,7 +13,7 @@ export default function Test() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setContent('narrative'))
+    dispatch(setContent('contacts'))
   }, [dispatch])
 
   useData();

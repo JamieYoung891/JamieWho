@@ -9,7 +9,6 @@ export const Button = styled.button`
   display: inline-block;
   overflow: hidden;
 
-  min-width: 2em;
   max-width: 2em;
   height: 2em;
 
