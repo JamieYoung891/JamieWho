@@ -1,6 +1,6 @@
 const CONTENT_ACTION = {
   SET_NAME: "jamieWho/ui/content/SET:name",
-  RESET_NAME: "jamieWho/ui/content/RESET:name"
+  TOGGLE_TO_FADE_OUT: "jamieWho/ui/content/TOGGLE:toFadeOut"
 }
 
 export const CONTENT_NAME = {
@@ -11,19 +11,21 @@ export const CONTENT_NAME = {
   CONTACTS: "contacts"
 }
 
-export const setName_content = payload => ({ type: CONTENT_ACTION.SET_NAME, payload })
-export const resetName_content = () => ({ type: CONTENT_ACTION.RESET_NAME })
+export const setContent = payload => ({ type: CONTENT_ACTION.SET_NAME, payload })
+export const toggleToFadeOut = () => ({ type: CONTENT_ACTION.TOGGLE_TO_FADE_OUT })
 
-const initialState = { name: CONTENT_NAME.INTRO }
+const initialState = {
+  toFadeOut: false,
+  name: CONTENT_NAME.INTRO
+}
 
 export default function content(state = initialState, { type, payload }) {
   switch (type) {
 
     case CONTENT_ACTION.SET_NAME:
-      return { name: payload }
-
-    case CONTENT_ACTION.RESET_NAME:
-      return { ...initialState }
+      return { name: payload, toFadeOut: false }
+    case CONTENT_ACTION.TOGGLE_TO_FADE_OUT:
+      return { ...state, toFadeOut: !state.toFadeOut }
 
     default:
       return state

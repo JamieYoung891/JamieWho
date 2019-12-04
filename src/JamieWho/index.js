@@ -1,80 +1,36 @@
-import React from 'react'
-import useData from "./hooks/useData"
-import { useSelector } from 'react-redux'
+import React, { Fragment, useEffect } from 'react'
 
-import "./index.css"
+import { useSelector, useDispatch } from 'react-redux'
+import { setContent, CONTENT_NAME } from './redux/ui/content';
 
-import LoadIndicator from "./component/Loader"
-import Header from "./component/Header"
-import Nav from "./component/Nav"
-import Footer from "./component/Footer"
+import useData from './hooks/useData'
+import Header from './components/Header'
 
-import Resume from "./component/Content/Resume"
-import Portfolio from "./component/Content/Projects"
-import Narrative from "./component/Content/Narrative"
-import Contact from "./component/Content/Contacts"
-import SkillsDescription from './component/Content/Skill'
+import Content from './components/Content';
 
-function JamieWho() {
-  const { content: { name: contentName }, loader: { max, loaded } } = useSelector(({ ui }) => ui)
+export default function Test() {
+  const contentName = useSelector(({ ui }) => ui.content.name)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setContent('resume'))
+  }, [dispatch])
+
   useData();
 
-  const componentInserter = () => {
-    if (max && max === loaded) {
-      const componentNames = [], components = [];
+  const { max, loaded } = useSelector(({ ui }) => ui.loader)
 
-      if (contentName === "intro") componentNames.push("header")
-      else if (contentName === "contacts") Object.assign(componentNames, ["header", "nav", "content"])
-      else Object.assign(componentNames, ["header", "nav", "content", "footer", "skillsDescription"])
+  if (max && max === loaded)
+    if (contentName === CONTENT_NAME.INTRO)
+      return <Header />
 
-      componentNames.forEach(componentName => {
-        if (componentName === "content") componentName = contentName;
+    else return (
+      <Fragment>
+        <Header />
+        <Content />
+      </Fragment>
+    )
 
-        switch (componentName) {
-
-          case "header":
-            components.push(<Header key={componentName} />)
-            break;
-          case "nav":
-            components.push(<Nav key={componentName} />)
-            break;
-          case "footer":
-            components.push(<Footer key={componentName} />)
-            break;
-
-          case "intro":
-            break;
-          case "resume":
-            components.push(<Resume key={contentName} />)
-            break;
-          case "portfolio":
-            components.push(<Portfolio key={contentName} />)
-            break;
-          case "narrative":
-            components.push(<Narrative key={contentName} />)
-            break;
-          case "contacts":
-            components.push(<Contact key={contentName} />)
-            break;
-
-          case "skillsDescription":
-            components.push(<SkillsDescription key={componentNames} />)
-            break;
-
-          default:
-            break;
-        }
-      });
-
-      return components
-    } else return
-  }
-
-  return <div className="jamie-who">
-    <LoadIndicator />
-    {componentInserter()}
-  </div>
-
+  else
+    return <div style={{ "margin": "5vmin auto" }}>loading</div>
 }
-
-export default JamieWho;
