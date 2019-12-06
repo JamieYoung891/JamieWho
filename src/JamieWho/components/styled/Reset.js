@@ -28,7 +28,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  h1, h2, p {
+  h1, h2, h3, h4, p {
     margin-block-start: 0;
     margin-block-end: 0;
   }

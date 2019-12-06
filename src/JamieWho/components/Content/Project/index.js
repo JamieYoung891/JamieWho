@@ -9,7 +9,7 @@ function Project() {
   const dispatch = useDispatch()
 
   return (
-    <div>Project</div>
+    <div></div>
   )
 
 

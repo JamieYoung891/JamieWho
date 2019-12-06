@@ -35,10 +35,27 @@ export const ContentSection = styled.h1`
   font-weight: 800;
   color: ${color.text.light};
 `
+
 export const ContentSectionSub = styled.h2`
   display: inline-block;
   width: max-content;
   font-size: 1.4rem;
   font-weight: 200;
+  color: ${color.text.light};
+`
+
+export const ContentSectionItem1 = styled.h3`
+  display: inline-block;
+  width: max-content;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: ${color.text.light};
+`
+
+export const ContentSectionItem2 = styled.h4`
+  display: inline-block;
+  width: max-content;
+  font-size: 1rem;
+  font-weight: 800;
   color: ${color.text.light};
 `
