@@ -7,7 +7,7 @@ export const enterProject = payload => ({ type: PROJECT_ACTION.ENTER, payload })
 export const leaveProject = () => ({ type: PROJECT_ACTION.LEAVE })
 
 const initialState = {
-  name: 0,
+  name: null,
   toShow: false
 }
 

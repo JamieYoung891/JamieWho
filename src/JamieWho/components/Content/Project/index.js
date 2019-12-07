@@ -1,15 +1,118 @@
 import React from "react"
-import { useSelector, useDispatch } from 'react-redux'
-import { enterProject } from '../../../redux/ui/project'
-// import "./index.css"
 
-function Project() {
-  const { name: itemNum, toShow } = useSelector(({ ui }) => ui.project)
-  const { portfolio: data } = useSelector(({ data }) => data)
+import { useSelector, useDispatch } from 'react-redux'
+import { leaveProject } from '../../../redux/ui/project'
+
+import styled, { css } from 'styled-components'
+import { Heading, Container, constants } from "../../styled"
+import CloseButton from "../../CloseButton"
+
+const ProjectArticle = styled(Container.FullScreen)`
+  position: fixed;
+  top: -100%;
+  left: 0;
+
+  background-color: ${constants.color.primary.light};
+
+  transition-duration: 1s;
+  transition-property: top;
+
+  > div {
+    max-height: 90%;
+    border-radius: 3rem;
+    padding: 3rem;
+
+    background-color: ${constants.color.white.light};
+    
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar { display: none; }
+  }
+
+
+  > div > ${CloseButton} {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+
+    font-size: 0.5rem;
+  }
+
+  > div > :first-child > ${Heading.ContentSectionSub} { margin-left: 1rem; }
+
+  > div > div > ul {
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+    line-height: 1.3;
+
+    > li {
+      margin-bottom: 0.5rem;
+
+      :last-of-type { margin-bottom: 0; }
+
+      ::before {
+        content: '-';
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  ${props => props.css}
+`
+
+const showProject = css`
+  top: 0;
+`
+
+const Project = () => {
+  const { name, toShow } = useSelector(({ ui }) => ui.project)
+  const { portfolio: { info: database } } = useSelector(({ data }) => data)
   const dispatch = useDispatch()
 
+  // let _css; if (true) _css = showProject
+  let _css; if (toShow) _css = showProject
+
+  if (!name) return (
+    <ProjectArticle as='article' css={_css}>
+      <Container.PositionCenter>
+        <Heading.ContentSection>
+          There's no data...
+        </Heading.ContentSection>
+      </Container.PositionCenter>
+    </ProjectArticle>
+  )
+
+  // const itemData = database.filter(o => o.name === 'jamieWho')[0]
+  const itemData = database.filter(o => o.name === name)[0]
+
+  const arrayMaker = _data => {
+    const array = _data.split('\n')
+
+    for (let i = 0; i < array.length; i++)
+      array[i] = <li key={i}>{array[i]}</li>
+
+    return array
+  }
+
   return (
-    <div></div>
+    <ProjectArticle as='article' css={_css}>
+      <Container.PositionCenter as={Container.MaxWidth}>
+        <Container.ContentSectionDiv>
+          <Heading.ContentSection>{itemData.title}</Heading.ContentSection>
+          <Heading.ContentSectionSub>{itemData.desc}</Heading.ContentSectionSub>
+        </Container.ContentSectionDiv>
+        <Container.ContentSectionDiv margin='2rem'>
+          <Heading.ContentSectionItem1>Circumstances</Heading.ContentSectionItem1>
+          <ul>{arrayMaker(itemData.circumstances)}</ul>
+        </Container.ContentSectionDiv>
+        <Container.ContentSectionDiv>
+          <Heading.ContentSectionItem1>Solutions</Heading.ContentSectionItem1>
+          <ul>{arrayMaker(itemData.solutions)}</ul>
+        </Container.ContentSectionDiv>
+        <CloseButton onClick={() => dispatch(leaveProject())} />
+      </Container.PositionCenter>
+    </ProjectArticle>
   )
 
 

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { constants } from './styled'
 
 export default styled.button`
-  width: 3rem;
-  height: 3rem;
+  width: 3em;
+  height: 3em;
 
   padding: 0;
   border: 0 hidden transparent;
