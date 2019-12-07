@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ResumeSection from './ResumeSection'
-import { Container, Heading, constants } from '../styled'
+import { Container, Heading, Anchor, constants } from '../styled'
 
 const ResumeSectionSkillsCategory = styled(Container.ContentSectionDiv)`
 
@@ -26,14 +26,14 @@ const ResumeSectionSkillsCategory = styled(Container.ContentSectionDiv)`
     
     :last-child::after { content: none; }
 
-    > em {
+    > a > em {
       font-weight: 800;
       font-style: normal;
     }
   }
 `
 
-const ResumeSectionSkills = ({ data: { category, index: skillsArray } }) => {
+const ResumeSectionSkills = ({ data: { category, index: skillsArray }, onClick }) => {
   const children = [], _category = category.filter(o => o.category === 'sub')
 
   _category.forEach(({ name: categoryName }) => {
@@ -43,7 +43,12 @@ const ResumeSectionSkills = ({ data: { category, index: skillsArray } }) => {
     skills.forEach(({ name, title, em }) => {
       categoryChildren.push(
         <li key={`resume-section-skills-${categoryName}-${name}`}>
-          {em ? <em>{title}</em> : title}
+          <Anchor.Translate
+            href={`#skills?${name}`}
+            onClick={() => onClick.skill(name)}
+          >
+            {em ? <em>{title}</em> : title}
+          </Anchor.Translate>
         </li>
       )
     })

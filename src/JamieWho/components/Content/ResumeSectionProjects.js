@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ResumeSection from './ResumeSection'
-import { Container, Heading, constants } from '../styled'
+import { Container, Heading, constants, Anchor } from '../styled'
 
 const ResumeSectionProjectItem = styled(Container.ContentSectionDiv)`
 
@@ -40,7 +40,7 @@ const ResumeSectionProjectItem = styled(Container.ContentSectionDiv)`
   }
 `
 
-const ResumeSectionProjects = ({ data }) => {
+const ResumeSectionProjects = ({ data, onClick }) => {
 
   const children = [];
 
@@ -48,7 +48,14 @@ const ResumeSectionProjects = ({ data }) => {
     children.push(
       <ResumeSectionProjectItem key={`resume-projects__${name}`}>
         <div>
-          <Heading.ContentSectionItem1>{title}</Heading.ContentSectionItem1>
+          <Heading.ContentSectionItem1>
+            <Anchor.Translate
+              href={`#projects?${name}`}
+              onClick={() => onClick.project(name)}
+            >
+              {title}
+            </Anchor.Translate>
+          </Heading.ContentSectionItem1>
           {url && <a href={url}><img src='/external-link.svg' alt='external link' /></a>}
           <Heading.ContentSectionItem2>{desc}</Heading.ContentSectionItem2>
         </div>
