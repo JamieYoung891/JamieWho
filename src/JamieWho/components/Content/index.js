@@ -11,8 +11,8 @@ import Footer from '../Footer'
 import Resume from './Resume'
 import Projects from './Projects'
 import Narrative from './Narrative'
-import Skill from './Skill'
-import Project from './Project'
+import DescriptionProject from './DescriptionProject'
+import DescriptionSkill from './DescriptionSkill'
 
 
 const Section = styled.section`
@@ -28,8 +28,8 @@ export default function () {
   const utilize = _content => (
     <Fragment>
       {_content}
-      <Skill />
-      <Project />
+      <DescriptionSkill />
+      <DescriptionProject />
       <Footer />
     </Fragment>
   )
