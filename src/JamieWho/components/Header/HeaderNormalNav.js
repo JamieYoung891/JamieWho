@@ -6,7 +6,7 @@ import { toggleNav } from '../../redux/ui/nav'
 import styled, { css } from 'styled-components'
 import { Container, constants } from '../styled'
 import CloseButton from '../CloseButton'
-import { makeListItemArray } from '../func'
+import { makeArray_li } from '../func'
 
 const Nav = styled(Container.FullScreen)`
   display: grid;
@@ -71,7 +71,7 @@ export default function ({ setToContent }) {
     dispatch(toggleNav())
     setToContent(payload)
   }
-  const listItems = makeListItemArray(data, onClick_listItems)
+  const listItems = makeArray_li(data, onClick_listItems)
 
   const toOpen = useSelector(({ ui }) => ui.nav.toOpen)
   let css = null;

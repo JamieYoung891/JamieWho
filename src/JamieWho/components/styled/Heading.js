@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { color } from './constants'
 
 export const CurlyBraces = styled.h1`
@@ -19,14 +19,39 @@ export const CurlyBraces = styled.h1`
   ${props => props.css}
 `
 
-export const UnderlineCenter = styled.h1`
+const underlineCss = css`
   width: max-content;
-  margin: 0 auto;
-  padding: 0 1em;
-  border: 0.2em solid transparent;
-  color: ${color.primary.normal};
-  border-radius: 1em;
+  border-bottom: 0.3em solid ${color.primary.normal};
 `
+
+export const Underline = {
+  Center: styled.h1`
+    margin: 0 auto;
+    padding: 0 1.5em;
+    border: 0.3em solid transparent;
+    border-radius: 1.5em;
+    text-align:center;
+
+    ${underlineCss}
+  `,
+  Left: styled.h1`
+    padding-right: 1.5em;
+    border-right: 0.3em solid transparent;
+    border-bottom-right-radius: 1.5em;
+
+    ${underlineCss}
+  `,
+  Right: styled.h1`
+    margin-right: 0;
+    margin-left: auto;
+    padding-left: 1.5em;
+    border-left: 0.3em solid transparent;
+    border-bottom-left-radius: 1.5em;
+    text-align: right;
+
+    ${underlineCss}
+  `
+}
 
 export const ContentSection = styled.h1`
   display: inline-block;

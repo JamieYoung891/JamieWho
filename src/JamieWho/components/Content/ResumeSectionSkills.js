@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import ResumeSection from './ResumeSection'
-import { Container, Heading, Anchor, constants } from '../styled'
+import { Container, Heading, constants } from '../styled'
+import { makeArray_skill } from '../func'
 
 const ResumeSectionSkillsCategory = styled(Container.ContentSectionDiv)`
 
@@ -38,20 +39,7 @@ const ResumeSectionSkills = ({ data: { category, index: skillsArray }, onClick }
 
   _category.forEach(({ name: categoryName }) => {
     const skills = skillsArray.filter(o => o.subCategory === categoryName);
-    const categoryChildren = [];
-
-    skills.forEach(({ name, title, em }) => {
-      categoryChildren.push(
-        <li key={`resume-section-skills-${categoryName}-${name}`}>
-          <Anchor.Translate
-            href={`#skills?${name}`}
-            onClick={() => onClick.skill(name)}
-          >
-            {em ? <em>{title}</em> : title}
-          </Anchor.Translate>
-        </li>
-      )
-    })
+    const categoryChildren = makeArray_skill(categoryName, skills, onClick.skill);
 
     children.push(
       <ResumeSectionSkillsCategory
