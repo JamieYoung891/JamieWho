@@ -47,3 +47,9 @@ export const animation = {
   enterContent: fade(true),
   leaveContent: fade(false)
 }
+
+export const marginCenter = css`
+  width: max-content;
+  margin-right: auto;
+  margin-left: auto;
+`

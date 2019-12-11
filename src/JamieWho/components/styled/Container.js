@@ -27,15 +27,15 @@ export const MaxWidth = styled.div`
 
 export const ContentSection = styled.section`
   padding: 3rem 0;
-  :first-of-type { padding-top: 6rem }
-  :last-of-type { padding-bottom: 6rem }
+  :first-child { padding-top: 6rem }
+  :last-child { padding-bottom: 6rem }
 
   ${props => props.css}
 `
 
 export const ContentSectionDiv = styled.div`
   margin-bottom: ${props => props.margin || '3rem'};
-  :last-of-type { margin-bottom: 0; }
+  :last-child { margin-bottom: 0; }
 
   ${props => props.css}
 `

@@ -1,7 +1,22 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import * as constants from './constants'
 
 const { color: { primary, white } } = constants
+
+export const buttonCSS_activated = css`
+  ::before { background-color: ${primary.normal}; }
+`
+
+export const buttonCss_hovered = css`
+  max-width: 10em;
+  margin-right: 1em;
+  color: ${primary.normal};
+
+  ::before {
+    margin-right: 0.5em;
+    background-color: ${primary.normal};
+  }
+`
 
 export const Button = styled.button`
   cursor: pointer;
@@ -44,14 +59,7 @@ export const Button = styled.button`
   }
 
   :hover {
-    max-width: 10em;
-    margin-right: 1em;
-    color: ${primary.normal};
-
-    ::before {
-      margin-right: 0.5em;
-      background-color: ${primary.normal}
-    }
+    ${buttonCss_hovered}
   }
 
   ${props => props.css}

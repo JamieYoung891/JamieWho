@@ -13,7 +13,7 @@ export default function Test() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setContent('resume'))
+    dispatch(setContent(CONTENT_NAME.PROJECTS))
   }, [dispatch])
 
   useData();

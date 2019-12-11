@@ -9,6 +9,7 @@ const ProjectArticle = styled(Container.FullScreen)`
   position: fixed;
   top: -100%;
   left: 0;
+  z-index: 101;
 
   background-color: ${constants.color.primary.light};
 
