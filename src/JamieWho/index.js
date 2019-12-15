@@ -7,30 +7,35 @@ import useData from './hooks/useData'
 import Header from './components/Header'
 
 import Content from './components/Content';
+import LoadIndicator from './components/LoadIndicator';
 
-export default function Test() {
+const JamieWho = () => {
   const contentName = useSelector(({ ui }) => ui.content.name)
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setContent(CONTENT_NAME.NARRATIVE))
-  }, [dispatch])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(setContent(CONTENT_NAME.NARRATIVE))
+  // }, [dispatch])
 
   useData();
 
   const { max, loaded } = useSelector(({ ui }) => ui.loader)
 
+  const header = <Header key='Header' />
+  const content = <Content key='Content' />
+
+  let children = []
+
   if (max && max === loaded)
-    if (contentName === CONTENT_NAME.INTRO)
-      return <Header />
+    if (contentName === CONTENT_NAME.INTRO) children = [header]
+    else children = [header, content]
 
-    else return (
-      <Fragment>
-        <Header />
-        <Content />
-      </Fragment>
-    )
-
-  else
-    return <div style={{ "margin": "5vmin auto" }}>loading</div>
+  return (
+    <Fragment>
+      <LoadIndicator />
+      {children}
+    </Fragment>
+  )
 }
+
+export default JamieWho

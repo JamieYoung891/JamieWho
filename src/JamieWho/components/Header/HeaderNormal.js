@@ -15,12 +15,14 @@ const HeaderOuter = styled.header`
 
   transition-duration: 0.5s;
   transition-property: top;
+  pointer-events: none;
   
   > div {
     width: 100%;
     max-width: 167vmin;
     margin: 0 auto;
 
+    > * { pointer-events: initial; }
     > :nth-child(2) { margin: 0.5rem; }
   }
 

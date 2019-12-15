@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { constants } from './styled'
 
 export default styled.button`
+  cursor: pointer;
+
   width: 3em;
   height: 3em;
 

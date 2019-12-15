@@ -31,7 +31,6 @@ export default function FadeAnimation({ Component, toAnimateLeave, callback }) {
   }, [contentName, toContent, dispatch, callback])
 
   return (
-    // <div></div>
     <Component setToContent={setToContent} animation={animation} />
   )
 }

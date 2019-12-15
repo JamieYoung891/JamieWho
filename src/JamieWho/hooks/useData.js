@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { DATA_ACTION } from '../redux/data'
+import { actionCreator_data } from '../redux/data'
 import { actionCreator_loader } from '../redux/ui/loader'
 import Tabletop from 'tabletop'
 
@@ -25,17 +25,11 @@ export default function useData() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-
-    dispatch({
-      type: DATA_ACTION.GET_DATA.SUCCESS,
-      payload: { contents }
-    })
-
-
+    dispatch(actionCreator_data.getData.success({ contents: contents }))
 
     const max = Object.keys(dataKey).length;
     let loaded = 0;
-    dispatch(actionCreator_loader.set.max(max));
+    dispatch(actionCreator_loader.start(max));
 
     for (let name in dataKey) {
       let key = dataKey[name]
@@ -43,26 +37,28 @@ export default function useData() {
     }
 
     function getData(key, name) {
+      try {
+        Tabletop.init({
+          key,
+          simpleSheet: false,
 
-      Tabletop.init({
-        key,
-        simpleSheet: false,
-        callback: data => dataExtractor(data)
-      })
-
-      const dataExtractor = data => {
-        const dataExtracted = {}
-        const keys = Object.keys(data);
-
-        keys.forEach(key => dataExtracted[key] = data[key].elements)
-
-        dispatch({
-          type: DATA_ACTION.GET_DATA.SUCCESS,
-          payload: { [name]: dataExtracted }
+          callback: data => extractData(data)
         })
 
-        dispatch(actionCreator_loader.set.loaded(++loaded))
-      }
+        function extractData(data) {
+          const dataExtracted = {}
+          const keys = Object.keys(data)
+          keys.forEach(key => dataExtracted[key] = data[key].elements)
+
+          dispatchData(dataExtracted)
+        }
+
+        function dispatchData(dataExtracted) {
+          dispatch(actionCreator_data.getData.success({ [name]: dataExtracted }))
+          dispatch(actionCreator_loader.setLoaded(++loaded))
+        }
+
+      } catch (error) { dispatch(actionCreator_data.getData.failure(error)) }
     }
   }, [dispatch])
 }

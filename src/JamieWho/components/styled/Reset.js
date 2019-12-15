@@ -47,7 +47,6 @@ export default createGlobalStyle`
   
   @keyframes fade-out {
     0% { opacity: 1 }
-    99% { opacity: 0 }
-    100% { display: none }
+    100% { display: none; opacity: 0; }
   }
 `
