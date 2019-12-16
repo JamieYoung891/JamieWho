@@ -1,5 +1,25 @@
 import { createGlobalStyle } from 'styled-components'
-import { color } from './constants'
+import { color, responsive } from './constants'
+
+const { viewportWidth, fontSize } = responsive
+
+const responsiveCSS = (() => {
+  let media = ''
+
+  for (const key in viewportWidth) {
+    const width = viewportWidth[key];
+
+    media += `
+      @media (orientation: portrait) and (min-width: ${width}px),
+        (orientation: landscape) and (min-height: ${width}px) {
+        font-size: ${fontSize[key]}px;
+      };
+    `
+  }
+  
+  return media
+})()
+
 export default createGlobalStyle`
 
   @import url('https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css');
@@ -8,9 +28,11 @@ export default createGlobalStyle`
     margin: 0;
     
     font-family: 'NanumSquareRound', sans-serif;
-    font-size: 12px;
     color: ${color.text.normal};
     line-height: 1;
+
+    /* Codes for for Responsive Web */
+    ${responsiveCSS}
   }
 
   #root {

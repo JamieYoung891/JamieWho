@@ -1,5 +1,22 @@
 import { css } from 'styled-components'
 
+export const responsive = {
+  viewportWidth: {
+    mobile: "320",
+    mobileLarge: "360",
+    mobileLarger: "400",
+    tablet: "768",
+    tabletLarge: "1024",
+  },
+  fontSize: {
+    mobile: "12",
+    mobileLarge: "14",
+    mobileLarger: "16",
+    tablet: "24",
+    tabletLarge: "32"
+  }
+}
+
 export const color = {
   primary: {
     // darker: 'hsl(42, 96%, 34%)',

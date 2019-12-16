@@ -5,6 +5,7 @@ import { constants, Heading } from '../styled'
 
 const StyledDiv = styled.div`
   margin-bottom: 2rem;
+  text-align: center;
 
   > :first-child {
     color: ${constants.color.text.light};
