@@ -7,7 +7,7 @@ export const buttonCSS_activated = css`
   ::before { background-color: ${primary.normal}; }
 `
 
-export const buttonCss_hovered = css`
+export const buttonCSS_hovered = css`
   max-width: 10em;
   margin-right: 1em;
   color: ${primary.normal};
@@ -18,7 +18,8 @@ export const buttonCss_hovered = css`
   }
 `
 
-export const Button = styled.button`
+export const buttonCSS = css`
+
   cursor: pointer;
 
   display: inline-block;
@@ -49,6 +50,7 @@ export const Button = styled.button`
     border: none;
     border-radius: 1em;
 
+    vertical-align:middle;
     text-align: center;
     color: ${white.normal};
 
@@ -59,8 +61,12 @@ export const Button = styled.button`
   }
 
   :hover {
-    ${buttonCss_hovered}
+    ${buttonCSS_hovered}
   }
 
   ${props => props.css}
+`
+
+export const Button = styled.button`
+  ${buttonCSS}
 `

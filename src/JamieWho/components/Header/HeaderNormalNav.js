@@ -7,59 +7,103 @@ import styled, { css } from 'styled-components'
 import { Container, constants } from '../styled'
 import CloseButton from '../CloseButton'
 import { makeArray_li } from '../func'
+import { buttonCSS } from '../styled/Button'
+
+const tabletWidth = constants.responsive.viewportWidth.tablet
 
 const Nav = styled(Container.FullScreen)`
-  display: grid;
-  grid-auto-flow: row;
-  align-items: stretch;
-  opacity: 0;
 
-  position: fixed;
-  top: -100%;
-  left: 0;
-  z-index: 100;
+  @media (orientation: portrait) and (max-width: ${tabletWidth-1}px),
+    (orientation: landscape) and (max-height: ${tabletWidth-1}px) {
 
-  font-weight: 800;
-  font-size: 2rem;
-  text-align: center;
-  color: ${constants.color.white.normal};
-
-  transition-duration: 0.5s;
-  transition-property: top, opacity;
-
-  > * {
-    cursor: pointer;
-
-  }
-
-  > button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 101;
-  }
-
-  > li {
     display: grid;
-    align-content: center;
+    grid-auto-flow: row;
+    align-items: stretch;
+    opacity: 0;
 
-    background-color: ${constants.color.primary.normal};
-    opacity: 0.7;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    z-index: 100;
+
+    font-weight: 800;
+    font-size: 2rem;
+    text-align: center;
+    color: ${constants.color.white.normal};
 
     transition-duration: 0.5s;
-    transition-property: opacity;
+    transition-property: top, opacity;
 
-    :hover {
-      opacity: 1;
+    > * {
+      cursor: pointer;
+
+    }
+
+    > button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 101;
+    }
+
+    > li {
+      display: grid;
+      align-content: center;
+
+      background-color: ${constants.color.primary.normal};
+      opacity: 0.7;
+
+      transition-duration: 0.5s;
+      transition-property: opacity;
+
+      :hover {
+        opacity: 1;
+      }
     }
   }
 
+  @media (orientation: portrait) and (min-width: ${tabletWidth}px),
+    (orientation: landscape) and (min-height: ${tabletWidth}px) {
+
+    position: absolute;
+    bottom: 100%;
+    right: 50%;
+    transform: translateX(50%);
+
+    width: max-content;
+    height: max-content;
+
+    opacity: 0;
+
+    transition-duration: 0.5s;
+    transition-property: bottom, opacity;
+
+    > button {
+      display: none;
+    }
+    
+    > li {
+      ${buttonCSS}
+      display: inline-block;
+    }
+  }
   ${props => props.css}
 `
 
 const navOpenCss = css`
-  top: 0;
-  opacity: 1;
+
+  @media (orientation: portrait) and (max-width: ${tabletWidth-1}px),
+    (orientation: landscape) and (max-height: ${tabletWidth-1}px) {
+
+    top: 0;
+    opacity: 1;
+  }
+
+  @media (orientation: portrait) and (min-width: ${tabletWidth}px),
+    (orientation: landscape) and (min-height: ${tabletWidth}px) {
+    bottom: 0;
+    opacity: 1;
+  }
 `
 
 export default function ({ setToContent }) {
